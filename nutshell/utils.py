@@ -41,7 +41,6 @@ def model(inputs, is_training=True, lmbda=5e-4, dropout_rate=0):
   with tf.name_scope('stem'):
     x = stem = nets.MobileNet50(inputs, is_training=True, stem=True,  scope='stem', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
 
-
   p = x.p
 
   x = darkdepthsepconv(x, 1024, 3, name='genYOLOv2/conv7', lmbda=lmbda, dropout_rate=dropout_rate)
