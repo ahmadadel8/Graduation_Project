@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "nutshell/plotter.py", line 57, in <module>
+    cleaner(file_dir,where_to_sve)
+  File "nutshell/plotter.py", line 26, in cleaner
+    for i,lr in file_opened:
+  File "nutshell/plotter.py", line 14, in read_file
+    mAP  = float(line.split('=')[1])
+ValueError: could not convert string to float: ' SaveV2[dtypes'
