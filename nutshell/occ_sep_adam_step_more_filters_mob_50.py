@@ -61,7 +61,7 @@ step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 lr = tf.train.piecewise_constant(
     gstep, [100, 180, 320, 570, 1000, 10000 ,15000, 25000],
-    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 5e-5, 1e-5, 1e-6])
+    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-4, 1e-5, 1e-6])
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
@@ -110,10 +110,9 @@ with tf.Session() as sess:
     sess.run(init_op)
     sess.run(yolo.stem.pretrained())
 
-  losses = []
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
-    
+    losses = []
     trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
 
     sess.run(step.assign(i))

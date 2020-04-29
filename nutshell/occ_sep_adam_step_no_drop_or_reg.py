@@ -116,10 +116,10 @@ with tf.Session() as sess:
     sess.run(init_op)
     sess.run(yolo.stem.pretrained())
 
-  losses = []
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
-    
+    losses = []
+
     trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
 
     sess.run(step.assign(i))
