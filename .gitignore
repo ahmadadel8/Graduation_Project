@@ -1,12 +1,6 @@
 lib
-bin
-nutshell/__pycache__
-nutshell/training_trial_step
-nutshell/training_trial_step1
-nutshell/training_trial_step2/
-nutshell/training_trial_step3/
-nutshell/training_trial_step4
+bin 
 nutshell/training_trial_step_clean
+nutshell/training_trial_step_more_filters
 nutshell/training_trial_step_bias_correction
-nutshell/training_trial_more_filters
-nutshell/training_trial_step_more_filters/
+nutshell/training_trial_step_more_filters_mob50
