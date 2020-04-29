@@ -61,7 +61,7 @@ step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 lr = tf.train.piecewise_constant(
     gstep, [100, 180, 320, 570, 1000, 10000 ,15000, 25000],
-    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-4, 1e-5, 1e-6])
+    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 5e-5, 1e-5, 1e-6])
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
