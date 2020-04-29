@@ -19,7 +19,7 @@ import shutil
 import wget
 import sys
 import voc
-from utils_more_filters_mob50.py import *
+from utils_more_filters_mob50 import *
 
 #ADDING THIS TO TEST THE GIT
 
