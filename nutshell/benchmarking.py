@@ -1,0 +1,90 @@
+from __future__ import division
+import tensorflow as tf
+import tensornets as nets
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+from IPython.display import clear_output
+import random
+import cv2
+from copy import copy, deepcopy
+from pathlib import Path
+import os
+import time 
+from datetime import timedelta
+from tqdm import tqdm
+#import zipfile
+import tarfile
+import shutil
+import wget
+import sys
+import voc
+from utils_more_filters import *
+import time 
+from datetime import timedelta
+
+
+tf.reset_default_graph() # It's importat to resume training from latest checkpoint 
+
+
+N_classes=20
+x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
+YOLF=model(x, lmbda=0, dropout_rate=0)
+
+TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
+YOLOv2=nets.YOLOv2COCO(x, is_training=False)
+YOLOv3=nets.YOLOv3VOC(x, is_training=False)
+
+t_diff_YOLF=[]
+t_diff_TinyYOLOv2=[]
+t_diff_YOLOv2=[]
+t_diff_YOLOv3=[]
+
+voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
+
+with tf.Session() as sess:
+    sess.run(TinyYOLOv2.pretrained())
+    sess.run(YOLOv2.pretrained())
+    sess.run(YOLOv3.pretrained())
+
+    acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
+
+    for img in enumerate(acc_data):
+
+    	ts=time.time()
+    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	t_diff_YOLF.append(time.time()-ts)
+
+    	ts=time.time()
+    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	t_diff_TinyYOLOv2.append(time.time()-ts)
+
+    	ts=time.time()
+    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	t_diff_YOLOv2.append(time.time()-ts)
+
+
+    	ts=time.time()
+    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	t_diff_YOLOv3.append(time.time()-ts)
+
+
+    print("TESTING DONE.")
+
+    print("=============================================")
+
+    print("YOLF FPS:", 1.0/np.mean(t_diff_YOLF))
+
+    print("=============================================")
+
+    print("TinyYOLOv2 FPS:", 1.0/np.mean(t_diff_TinyYOLOv2))
+
+
+    print("=============================================")
+
+    print("YOLOv2 FPS:", 1.0/np.mean(t_diff_YOLOv2))
+
+    print("=============================================")
+
+    print("YOLOv3 FPS:", 1.0/np.mean(t_diff_YOLOv3))
+
