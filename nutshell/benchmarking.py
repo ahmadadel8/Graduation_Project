@@ -50,6 +50,7 @@ with tf.Session() as sess:
 
     for (img,_) in acc_data:
 
+
     	ts=time.time()
     	acc_outs = sess.run(YOLF, {x: YOLF.preprocess(img),is_training: False})
     	t_diff_YOLF.append(time.time()-ts)
