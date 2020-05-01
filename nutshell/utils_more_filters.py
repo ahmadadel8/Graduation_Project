@@ -39,7 +39,7 @@ def model(inputs, stem_fn=nets.MobileNet25,is_training=True, lmbda=5e-4, dropout
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem = stem_fn(inputs, is_training=True, stem=True,  scope='stem') #bulding the model
+    x = stem = stem_fn(inputs, is_training=True, stem=True) #bulding the model
 
   p = x.p
 
