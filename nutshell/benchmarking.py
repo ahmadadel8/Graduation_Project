@@ -76,17 +76,17 @@ with tf.Session() as sess:
         t_diff_YOLF_V3_small.append(time.time()-ts)
 
         ts=time.time()
-    	acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
-    	t_diff_TinyYOLOv2.append(time.time()-ts)
+        acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
+        t_diff_TinyYOLOv2.append(time.time()-ts)
 
-    	ts=time.time()
-    	acc_outs = sess.run(YOLOv2, {x: YOLOv2.preprocess(img),is_training: False})
-    	t_diff_YOLOv2.append(time.time()-ts)
+        ts=time.time()
+        acc_outs = sess.run(YOLOv2, {x: YOLOv2.preprocess(img),is_training: False})
+        t_diff_YOLOv2.append(time.time()-ts)
 
 
-    	ts=time.time()
-    	acc_outs = sess.run(YOLOv3, {x: YOLOv3.preprocess(img),is_training: False})
-    	t_diff_YOLOv3.append(time.time()-ts)
+        ts=time.time()
+        acc_outs = sess.run(YOLOv3, {x: YOLOv3.preprocess(img),is_training: False})
+        t_diff_YOLOv3.append(time.time()-ts)
 
 
     print("TESTING DONE.")
