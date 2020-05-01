@@ -32,7 +32,7 @@ is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
 YOLF_V1=model(x, stem_fn=nets.MobileNet25)
-#YOLF_V3=model(x, stem_fn=nets.MobileNet75v3)
+YOLF_V2=model(x, stem_fn=nets.MobileNet50v2)
 #YOLF_V3_small=model(x, stem_fn=nets.MobileNet75v3small)
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
