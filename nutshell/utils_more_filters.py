@@ -33,13 +33,13 @@ def meta(dataset_name='voc'):
   
   return bases
 
-def model(inputs, is_training=True, lmbda=5e-4, dropout_rate=0): 
+def model(inputs, stem_fn=nets.MobileNet25,is_training=True, lmbda=5e-4, dropout_rate=0): 
   metas=meta()
   N_classes=metas['classes']
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem = nets.MobileNet25(inputs, is_training=True, stem=True,  scope='stem', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
+    x = stem = stem_fn(inputs, is_training=True, stem=True,  scope='stem') #bulding the model
 
   p = x.p
 
