@@ -28,6 +28,7 @@ tf.reset_default_graph() # It's importat to resume training from latest checkpoi
 
 
 N_classes=20
+is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 YOLF=model(x, lmbda=0, dropout_rate=0)
 
@@ -49,7 +50,6 @@ with tf.Session() as sess:
     acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
 
     for (img,_) in acc_data:
-
 
     	ts=time.time()
     	acc_outs = sess.run(YOLF, {x: YOLF.preprocess(img),is_training: False})
