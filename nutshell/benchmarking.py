@@ -75,7 +75,7 @@ with tf.Session() as sess:
         acc_outs = sess.run(YOLF_V3_small, {x: YOLF_V3_small.preprocess(img),is_training: False})
         t_diff_YOLF_V3_small.append(time.time()-ts)
 
-    	ts=time.time()
+        ts=time.time()
     	acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
     	t_diff_TinyYOLOv2.append(time.time()-ts)
 
