@@ -32,9 +32,8 @@ is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
 YOLF_V1=model(x, stem_fn=nets.MobileNet25)
-YOLF_V2=model(x, stem_fn=nets.MobileNet50v2)
-YOLF_V3=model(x, stem_fn=nets.MobileNet75v3)
-YOLF_V3_small=model(x, stem_fn=nets.MobileNet75v3small)
+#YOLF_V3=model(x, stem_fn=nets.MobileNet75v3)
+#YOLF_V3_small=model(x, stem_fn=nets.MobileNet75v3small)
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
 YOLOv2=nets.YOLOv2COCO(x, is_training=False)
@@ -67,13 +66,13 @@ with tf.Session() as sess:
         acc_outs = sess.run(YOLF_V2, {x: YOLF_V2.preprocess(img),is_training: False})
         t_diff_YOLF_V2.append(time.time()-ts)
 
-        ts=time.time()
-        acc_outs = sess.run(YOLF_V3, {x: YOLF_V3.preprocess(img),is_training: False})
-        t_diff_YOLF_V3.append(time.time()-ts)
+        #ts=time.time()
+        #acc_outs = sess.run(YOLF_V3, {x: YOLF_V3.preprocess(img),is_training: False})
+        #t_diff_YOLF_V3.append(time.time()-ts)
 
-        ts=time.time()
-        acc_outs = sess.run(YOLF_V3_small, {x: YOLF_V3_small.preprocess(img),is_training: False})
-        t_diff_YOLF_V3_small.append(time.time()-ts)
+        #ts=time.time()
+        #acc_outs = sess.run(YOLF_V3_small, {x: YOLF_V3_small.preprocess(img),is_training: False})
+        #t_diff_YOLF_V3_small.append(time.time()-ts)
 
         ts=time.time()
         acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
