@@ -43,9 +43,8 @@ t_diff_YOLOv3=[]
 voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 
 with tf.Session() as sess:
-    sess.run(TinyYOLOv2.pretrained())
-    sess.run(YOLOv2.pretrained())
-    sess.run(YOLOv3.pretrained())
+    sess.run( tf.global_variables_initializer())
+
 
     acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
 
