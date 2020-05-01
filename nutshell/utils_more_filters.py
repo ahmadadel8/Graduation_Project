@@ -55,6 +55,7 @@ def model(inputs, stem_fn=nets.MobileNet25,is_training=True, lmbda=5e-4, dropout
   elif stem_fn==nets.MobileNet50v2:
     p = tf.reshape(p,[-1, 13,13,1536], name='flat5a')
 
+  print(p.shape)
 
   x = tf.concat([p, x], axis=3, name='concat')
 
