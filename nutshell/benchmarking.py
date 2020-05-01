@@ -51,20 +51,20 @@ with tf.Session() as sess:
     for img in enumerate(acc_data):
 
     	ts=time.time()
-    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	acc_outs = sess.run(YOLF, {x: YOLF.preprocess(img),is_training: False})
     	t_diff_YOLF.append(time.time()-ts)
 
     	ts=time.time()
-    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
     	t_diff_TinyYOLOv2.append(time.time()-ts)
 
     	ts=time.time()
-    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	acc_outs = sess.run(YOLOv2, {x: YOLOv2.preprocess(img),is_training: False})
     	t_diff_YOLOv2.append(time.time()-ts)
 
 
     	ts=time.time()
-    	acc_outs = sess.run(yolo, {x: YOLF.preprocess(img),is_training: False})
+    	acc_outs = sess.run(YOLOv3, {x: YOLOv3.preprocess(img),is_training: False})
     	t_diff_YOLOv3.append(time.time()-ts)
 
 
