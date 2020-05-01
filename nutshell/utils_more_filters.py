@@ -47,7 +47,15 @@ def model(inputs, stem_fn=nets.MobileNet25,is_training=True, lmbda=5e-4, dropout
   x = darkdepthsepconv(x, 2048, 3, name='genYOLOv2/conv8', lmbda=lmbda, dropout_rate=dropout_rate)
 
   p = darkdepthsepconv(p, 128, 1, name='genYOLOv2/conv5a', lmbda=lmbda, dropout_rate=dropout_rate)
-  p = tf.reshape(p,[-1, 13,13,512], name='flat5a')
+  
+  sif stem_fn==nets.MobileNet25:
+    p = tf.reshape(p,[-1, 13,13,512], name='flat5a')
+  elif stem_fn==nets.MobileNet50v2:
+    p = tf.reshape(p,[-1, 13,13,1024], name='flat5a')
+  elif stem_fn==nets.MobileNet50v2:
+    p = tf.reshape(p,[-1, 13,13,1536], name='flat5a')
+
+
   x = tf.concat([p, x], axis=3, name='concat')
 
   x = darkdepthsepconv(x, 2048, 3, name='genYOLOv2/conv9', lmbda=lmbda, dropout_rate=dropout_rate)
