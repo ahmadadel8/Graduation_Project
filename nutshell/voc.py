@@ -217,6 +217,7 @@ def load_train(data_dir, data_name,
         files = get_files(data_dir, data_name, total_num)
         annotations = get_annotations(data_dir, files)
         dirs = np.zeros(len(files), dtype=np.int)
+        data_dir = [data_dir]  # put in list for consistent further processing
 
     total_num = len(files)
     for f in files:
@@ -259,8 +260,17 @@ def load_train(data_dir, data_name,
             celly = 1. * h / feature_size[0]
 
             processed_objs = []
+
+           	boxes=[]
             for obj in annotations[f]:
-                bbox = obj['bbox']
+            	boxes.append(obj['bbox'])
+
+            boxes=np.array(boxes, dtype=np.float64)
+            transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.5), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
+            x, _boxes = transforms(x.copy(), boxes.copy())
+
+
+            for bbox in _boxes:
                 centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
                 centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
                 cx = centerx / cellx
