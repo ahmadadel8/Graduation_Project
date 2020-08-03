@@ -15,6 +15,9 @@ from __future__ import division
 import os
 import numpy as np
 import xml.etree.ElementTree as ET
+from data_aug.data_aug import *
+from data_aug.bbox_util import *
+
 
 try:
     import cv2
