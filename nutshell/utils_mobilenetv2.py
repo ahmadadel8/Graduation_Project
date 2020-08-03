@@ -39,7 +39,7 @@ def model(inputs, is_training=True, lmbda=5e-4, dropout_rate=0):
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem = nets.MobileNet100v2(inputs, is_training=True, stem=True,  scope='stem', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
+    x = stem = nets.MobileNet100v2(inputs, is_training=True, stem=True,  scope='stem') #bulding the model
 
   p = x.p
 
