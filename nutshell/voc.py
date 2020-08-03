@@ -260,8 +260,7 @@ def load_train(data_dir, data_name,
             celly = 1. * h / feature_size[0]
 
             processed_objs = []
-
-           	boxes=[]
+            boxes=[]
             for obj in annotations[f]:
             	boxes.append(obj['bbox'])
 
