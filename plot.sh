@@ -13,3 +13,6 @@ python -u nutshell/plotter.py log_clean.out figure_clean.png
 python -u nutshell/plotter.py log_bias.out figure_bias.png
 python -u nutshell/plotter.py log_more_filters.out figure_more_filters.png
 python -u nutshell/plotter.py log_more_filters_mob50.out figure_more_filters_mob50.png
+python -u nutshell/plotter.py log_mobilenetv2.out figure_mobilenetv2.png
+
+
