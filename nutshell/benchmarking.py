@@ -18,7 +18,7 @@ import tarfile
 import shutil
 import wget
 import sys
-#import voc
+import voc
 from utils_mobilenetv1 import model as _YOLF
 from utils_mobilenetv2 import model as _YOLF_V2
 import time 
@@ -46,13 +46,13 @@ t_diff_TinyYOLOv2=[]
 t_diff_YOLOv2=[]
 t_diff_YOLOv3=[]
 
-#voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
+voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 
 with tf.Session() as sess:
     sess.run( tf.global_variables_initializer())
 
 
-    #acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
+    acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
 
     for (img,_) in acc_data:
 
