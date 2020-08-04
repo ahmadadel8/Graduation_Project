@@ -1,6 +1,4 @@
-bin 
-nutshell/training_trial_step_clean
-nutshell/training_trial_step_more_filters
-nutshell/training_trial_step_bias_correction
-nutshell/training_trial_step_more_filters_mob50
-nutshell/__pycache__
+coco_ann
+bin
+nutshell/__pycache
+pip_cache
