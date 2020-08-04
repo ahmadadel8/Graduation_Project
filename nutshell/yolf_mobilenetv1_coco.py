@@ -108,7 +108,7 @@ acc_best, best_epoch=0.0, 0
 
 with tf.Session() as sess:
 
-  edition='2017 '
+  edition=2017
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
   if (len(ckpt_files)!=0):
     train_saver.restore(sess,checkpoint_prefix)
@@ -117,10 +117,10 @@ with tf.Session() as sess:
     sess.run(yolo.stem.pretrained())
 
   for i in tqdm(range(step.eval(),233)):
-    # Iterate on VOC07+12 trainval once
+    # Iterate on COCO2017 s once
     losses = []
 
-    trains = voc.load_train(coco_dir, coco_ann_dir, 'train%d' %edition , batch_size=48)
+    trains = coco.load_train(coco_dir, coco_ann_dir, 'train%d' %edition , batch_size=48)
 
     sess.run(step.assign(i))
     
