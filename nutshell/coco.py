@@ -48,7 +48,7 @@ def get_files(data_dir, data_name, total_num=None):
         metas[data_name] = COCO("%s/annotations/instances_%s.json" %
                                 (data_dir, data_name))
     images = metas[data_name].imgs
-    fileids = images.keys()
+    fileids = list(images.keys())
     if total_num is not None:
         fileids = fileids[:total_num]
     files = [images[i]['file_name'] for i in fileids]
