@@ -2,3 +2,4 @@ coco_ann
 bin
 nutshell/__pycache
 pip_cache
+lib
