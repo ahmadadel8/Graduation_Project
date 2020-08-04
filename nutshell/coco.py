@@ -65,6 +65,7 @@ def get_annotations(data_dir, data_name, ids):
     for i in ids:
         annids = metas[data_name].getAnnIds(imgIds=i, iscrowd=None)
         objs = metas[data_name].loadAnns(annids)
+        annotations[i] = []
         width = metas[data_name].imgs[i]['width']
         height = metas[data_name].imgs[i]['height']
         valid_objs = []
