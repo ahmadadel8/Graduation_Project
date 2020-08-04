@@ -132,7 +132,7 @@ def load_train(data_dir, ann_dir, data_name,
             boxes=[]
 
 
-            for obj in annotations[fileids[idx]]
+            for obj in annotations[fileids[idx]]:
                 boxes.append(obj['bbox'])
 
             boxes=np.array(boxes, dtype=np.float64)
