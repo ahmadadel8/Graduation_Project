@@ -97,7 +97,6 @@ with tf.Session() as sess:
 
     print("=============================================")
 
-
     print("TinyYOLOv2 FPS:", 1.0/np.mean(t_diff_TinyYOLOv2))
 
 

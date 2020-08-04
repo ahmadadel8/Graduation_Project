@@ -19,6 +19,7 @@ import shutil
 import wget
 import sys
 import coco
+from pycocotools.coco import COCO
 from utils_mobilenetv1 import *
 
 #ADDING THIS TO TEST THE GIT
