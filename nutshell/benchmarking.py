@@ -33,7 +33,7 @@ is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
 YOLF=_YOLF(x)
-YOLF_V2 = _YOLF_v2(x)
+YOLF_V2 = _YOLF_V2(x)
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
 YOLOv2=nets.YOLOv2COCO(x, is_training=False)
