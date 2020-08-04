@@ -13,7 +13,8 @@ sys.path.append(lib_path)
 class RandomHorizontalFlip(object):
 
     """Randomly horizontally flips the Image with the probability *p*
-
+ 
+ 
     Parameters
     ----------
     p: float

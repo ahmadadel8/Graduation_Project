@@ -108,7 +108,7 @@ acc_best, best_epoch=0.0, 0
 
 with tf.Session() as sess:
 
-  edition='2017'
+  edition='2017 '
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
   if (len(ckpt_files)!=0):
     train_saver.restore(sess,checkpoint_prefix)

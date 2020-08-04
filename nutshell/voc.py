@@ -231,6 +231,7 @@ def load_train(data_dir, data_name,
     feature_size = [x // 32 for x in target_size]
     cells = feature_size[0] * feature_size[1]
 
+
     b = 0
     while True:
         if b == 0:
