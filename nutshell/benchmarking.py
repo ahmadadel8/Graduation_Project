@@ -54,6 +54,9 @@ with tf.Session() as sess:
 
     acc_data  = voc.load(voc_dir % 2007, 'test', total_num=1000)
 
+    print("TESTING STARTING.")
+
+
     for (img,_) in acc_data:
 
         ts=time.time()
@@ -93,10 +96,7 @@ with tf.Session() as sess:
     print("YOLF_V2 FPS:", 1.0/np.mean(t_diff_YOLF_V2))
 
     print("=============================================")
-    
-    print("tinyYOLF  FPS:", 1.0/np.mean(t_diff_YOLF_tiny))
 
-    print("=============================================")
 
     print("TinyYOLOv2 FPS:", 1.0/np.mean(t_diff_TinyYOLOv2))
 
