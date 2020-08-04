@@ -274,6 +274,7 @@ def load_train(data_dir, data_name,
 
 
             for bbox in _boxes:
+                bbox=[max(min(bbox[0], h), 0), max(min(bbox[1], w), 0), max(min(bbox[2], h), 0), max(min(bbox[3], w), 0)]
                 centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
                 centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
                 cx = centerx / cellx
