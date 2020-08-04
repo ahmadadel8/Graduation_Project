@@ -39,18 +39,18 @@ def model(inputs, is_training=True, lmbda=5e-4, dropout_rate=0):
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem = nets.MobileNet50(inputs, is_training=True, stem=True,  scope='stem', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
+    x = stem = nets.MobileNet50(inputs, is_training=True, stem=True,  scope='MobileNet50', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
 
   p = x.p
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv2/conv7', lmbda=lmbda, dropout_rate=dropout_rate)
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv2/conv8', lmbda=lmbda, dropout_rate=dropout_rate)
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv7', lmbda=lmbda, dropout_rate=dropout_rate)
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv8', lmbda=lmbda, dropout_rate=dropout_rate)
 
-  p = darkdepthsepconv(p, 64, 1, name='genYOLOv2/conv5a', lmbda=lmbda, dropout_rate=dropout_rate)
+  p = darkdepthsepconv(p, 64, 1, name='genYOLOv1/conv5a', lmbda=lmbda, dropout_rate=dropout_rate)
   p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
   x = tf.concat([p, x], axis=3, name='concat')
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv2/conv9', lmbda=lmbda, dropout_rate=dropout_rate)
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv9', lmbda=lmbda, dropout_rate=dropout_rate)
   x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(lmbda), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
