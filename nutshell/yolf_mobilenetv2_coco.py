@@ -18,9 +18,8 @@ import tarfile
 import shutil
 import wget
 import sys
-import voc
-from utils_more_filters import *
-import math
+import coco
+from utils_mobilenetv2 import *
 
 #ADDING THIS TO TEST THE GIT
 
@@ -32,6 +31,11 @@ def visualize_img(img,bboxes,thickness,name):
   img=img.reshape(img.shape[1],img.shape[1],3)
   for c, boxes_c in enumerate(bboxes):
     for b in boxes_c:
+      #ul_x, ul_y=b[0]-b[2]/2.0, b[1]-b[3]/2.0
+      #br_x, br_y=b[0]+b[2]/2.0, b[1]+b[3]/2.0
+
+      #ul_x, ul_y=(min(max(int(ul_x),0),415),min(max(int(ul_y),0),415))
+      #br_x, br_y=(min(max(int(br_x),0),415),min(max(int(br_y),0),415))
 
       ul_x, ul_y=int(b[0]), int(b[1])
       br_x, br_y=int(b[2]), int(b[3])
@@ -50,8 +54,8 @@ def visualize_img(img,bboxes,thickness,name):
 
 tf.reset_default_graph() # It's importat to resume training from latest checkpoint 
 
-voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
-
+coco_dir = '/lfs02/datasets/coco/'
+coco_ann_dir='/home/alex054u3/data/coco_ann/'
 # Define the model hyper parameters
 is_training = tf.placeholder(tf.bool)
 N_classes=20
@@ -61,27 +65,27 @@ yolo=model(x, lmbda=0, dropout_rate=0)
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 lr = tf.train.piecewise_constant(
-    gstep, [100, 180, 320, 570, 1000, 10000 ,15000, 25000],
-    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 5e-5, 1e-5, 1e-6])
+    gstep, [100, 180, 320, 570, 1000, 12000 ,15000, 25000],
+    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-4, 1e-5, 1e-6])
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_more_filters"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_coco"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
 
 
+
 init_op     = tf.global_variables_initializer()
 train_saver = tf.train.Saver(max_to_keep=2)
 
-def evaluate_accuracy(data_type='tr'):
-  if (data_type  == 'tr'): acc_data  = voc.load(voc_dir % 2007,'trainval',total_num =100)
-  elif(data_type == 'te') : acc_data  = voc.load(voc_dir % 2007, 'test', total_num=100)
+def evaluate_accuracy(data_type='tr', edition='2017'):
+  if (data_type  == 'tr'): acc_data  = coco.load(coco_dir, coco_ann_dir ,'train%d' % edition,total_num =100)
+  elif(data_type == 'te') : acc_data  = coco.load(coco_dir, coco_ann_dir, 'val%d' % edition, total_num=100)
   
-  #print('Train Accuracy: ',voc.evaluate(boxes, voc_dir % 2007, 'trainval'))
   results = []
   idx     = np.random.randint(100)
   for i,(img,_) in enumerate(acc_data):
@@ -92,18 +96,19 @@ def evaluate_accuracy(data_type='tr'):
       img_vis=img
       boxes_vis=boxes
   if (data_type  =='tr'):
-    eval_print=voc.evaluate(results, voc_dir % 2007, 'trainval')
+    eval_print=coco.evaluate(results, coco_dir ,'train%d' % edition)
   elif (data_type=='te'):
-    #visualize_img(yolo.preprocess(img_vis)*255,boxes_vis,5,'img')
-    eval_print=voc.evaluate(results, voc_dir % 2007, 'test')
+    eval_print=coco.evaluate(results, coco_dir ,'val%d' % edition)
   print('\n')
   print(eval_print)
   return eval_print
-
+  
 acc_best, best_epoch=0.0, 0
 
 
 with tf.Session() as sess:
+
+  edition='2017'
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
   if (len(ckpt_files)!=0):
     train_saver.restore(sess,checkpoint_prefix)
@@ -114,7 +119,8 @@ with tf.Session() as sess:
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
     losses = []
-    trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
+
+    trains = voc.load_train(coco_dir, coco_ann_dir, 'train%d' %edition , batch_size=48)
 
     sess.run(step.assign(i))
     
@@ -123,28 +129,23 @@ with tf.Session() as sess:
       if imgs is None: break
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
-      outs= sess.run([train,yolo ,yolo.loss],dict(zip(yolo.inputs, metas)))
+      outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
     
     
-    #print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
-    #tr_ac=evaluate_accuracy('tr')
-    #ts_ac=evaluate_accuracy('te')
-    #print ('\n')    
+    print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
+    tr_ac=evaluate_accuracy('tr', edition=edition)
+    ts_ac=evaluate_accuracy('te', edition=edition)
+    print ('\n')    
 
     acc =float(ts_ac.split(' = ')[-1])
 
-    if math.isnan(np.mean(losses)):
-      print("NN output: \n", yolo)
-      print('\n======================================================================================\n')
-      print(tf.trainable_variables())
+
+    if (acc > acc_best):
+      acc_best= acc
+      train_saver.save(sess,checkpoint_prefix)
+      best_epoch=i
 
 
-    #if (acc > acc_best):
-    #  acc_best= acc
-    #  train_saver.save(sess,checkpoint_prefix)
-    #  best_epoch=i
-
-
-    #print ('highest training accuacy:', acc_best, 'at epoch:', best_epoch, '\n')
-    #print ('=================================================================================================================================================================================')
+    print ('highest training accuacy:', acc_best, 'at epoch:', best_epoch, '\n')
+    print ('=================================================================================================================================================================================')

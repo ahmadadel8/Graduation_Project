@@ -19,7 +19,7 @@ import shutil
 import wget
 import sys
 import voc
-from utils_bias_correction import *
+from utils_mobilenetv1 import *
 
 #ADDING THIS TO TEST THE GIT
 
@@ -72,11 +72,10 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_bias_correction"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_voc"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
-
 
 
 
@@ -105,7 +104,6 @@ def evaluate_accuracy(data_type='tr'):
   print('\n')
   print(eval_print)
   return eval_print
-
   
 acc_best, best_epoch=0.0, 0
 
@@ -121,6 +119,7 @@ with tf.Session() as sess:
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
     losses = []
+
     trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
 
     sess.run(step.assign(i))

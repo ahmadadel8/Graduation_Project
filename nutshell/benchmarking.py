@@ -21,6 +21,7 @@ import sys
 import voc
 from utils_more_filters import model as _YOLF
 from utils import model as _YOLF_tiny
+from utils_mobilenetv2 import model as _YOLF_V2
 import time 
 from datetime import timedelta
 
@@ -34,6 +35,7 @@ x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
 YOLF=_YOLF(x)
 YOLF_tiny=_YOLF_tiny(x)
+YOLF_V2 = _YOLF_v2(x)
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
 YOLOv2=nets.YOLOv2COCO(x, is_training=False)
@@ -41,6 +43,7 @@ YOLOv3=nets.YOLOv3VOC(x, is_training=False)
 
 t_diff_YOLF=[]
 t_diff_YOLF_tiny=[]
+t_diff_YOLF_V2=[]
 
 t_diff_TinyYOLOv2=[]
 t_diff_YOLOv2=[]
@@ -64,9 +67,9 @@ with tf.Session() as sess:
         acc_outs = sess.run(YOLF_tiny, {x: YOLF_tiny.preprocess(img),is_training: False})
         t_diff_YOLF_tiny.append(time.time()-ts)
 
-        #ts=time.time()
-        #acc_outs = sess.run(YOLF_V3, {x: YOLF_V3.preprocess(img),is_training: False})
-        #t_diff_YOLF_V3.append(time.time()-ts)
+        ts=time.time()
+        acc_outs = sess.run(YOLF_V2, {x: YOLF_V2.preprocess(img),is_training: False})
+        t_diff_YOLF_V2.append(time.time()-ts)
 
         #ts=time.time()
         #acc_outs = sess.run(YOLF_V3_small, {x: YOLF_V3_small.preprocess(img),is_training: False})
@@ -91,6 +94,10 @@ with tf.Session() as sess:
     print("=============================================")
 
     print("YOLF FPS:", 1.0/np.mean(t_diff_YOLF))
+
+    print("=============================================")
+    
+    print("YOLF_V2 FPS:", 1.0/np.mean(t_diff_YOLF_V2))
 
     print("=============================================")
     
