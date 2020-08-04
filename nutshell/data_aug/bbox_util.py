@@ -12,6 +12,7 @@ def draw_rect(im, cords, color = None):
         numpy image 
     
     cords: numpy.ndarray
+    
         Numpy array containing bounding boxes of shape `N X 4` where N is the 
         number of bounding boxes and the bounding boxes are represented in the
         format `x1 y1 x2 y2`

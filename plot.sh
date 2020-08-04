@@ -9,10 +9,10 @@
 #SBATCH --output=plot.out
 
 
-python -u nutshell/plotter.py log_clean.out figure_clean.png
-python -u nutshell/plotter.py log_bias.out figure_bias.png
-python -u nutshell/plotter.py log_more_filters.out figure_more_filters.png
-python -u nutshell/plotter.py log_more_filters_mob50.out figure_more_filters_mob50.png
-python -u nutshell/plotter.py log_mobilenetv2.out figure_mobilenetv2.png
+python -u nutshell/plotter.py yolf_v1_coco.out fig_yolf_v1_coco.png
+python -u nutshell/plotter.py yolf_v2_coco.out fig_yolf_v2_coco.png
+python -u nutshell/plotter.py yolf_v1_voc.out fig_yolf_v1_voc.png
+python -u nutshell/plotter.py yolf_v2_voc.out fig_yolf_v2_voc.png
+
 
 

@@ -17,6 +17,7 @@ def read_file(file_dir):
 			else:yield None,None
 
 
+
 def cleaner(file_dir,where_to_sve):
 	file_opened = read_file(file_dir)
 
