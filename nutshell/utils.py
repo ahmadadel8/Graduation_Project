@@ -54,22 +54,20 @@ def meta(dataset_name='voc'):
 def model(inputs, stem_fn,dataset_name, scope='stem' ,is_training=True): 
   metas=meta(dataset_name)
   N_classes=metas['classes']
-  lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
     x = stem =  stem_fn(inputs, is_training=True, stem=True,  scope=scope) #bulding the model
 
   p = x.p
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv7', lmbda=lmbda, dropout_rate=dropout_rate)
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv8', lmbda=lmbda, dropout_rate=dropout_rate)
-
-  p = darkdepthsepconv(p, 64, 1, name='genYOLOv1/conv5a', lmbda=lmbda, dropout_rate=dropout_rate)
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv7')
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv8')
+  p = darkdepthsepconv(p, 64, 1, name='genYOLOv1/conv5a')
   p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
   x = tf.concat([p, x], axis=3, name='concat')
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv9', lmbda=lmbda, dropout_rate=dropout_rate)
-  x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(lmbda), padding='same', name='genYOLOv2/linear/conv')(x)
+  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv9')
+  x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
   def get_boxes(*args, **kwargs):
