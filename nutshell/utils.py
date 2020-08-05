@@ -55,7 +55,7 @@ def model(inputs, stem_fn,dataset_name, scope='stem' ,is_training=True):
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem =  (inputs, is_training=True, stem=True,  scope=scope) #bulding the model
+    x = stem =  stem_fn(inputs, is_training=True, stem=True,  scope=scope) #bulding the model
 
   p = x.p
 
