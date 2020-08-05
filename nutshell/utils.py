@@ -21,25 +21,41 @@ def darkdepthsepconv(inputs, filters, kernel, name, lmbda=5e-4, dropout_rate=0):
     x = tf.keras.layers.Dropout(rate=dropout_rate)(x, training=True)
     return x
     
+
+
+
 def meta(dataset_name='voc'):
+
+  with open(os.path.join(os.path.dirname(__file__), 'coco.names'), 'r') as f:
+    labels_coco = [line.rstrip() for line in f.readlines()]
+
+  with open(os.path.join(os.path.dirname(__file__), 'voc.names'), 'r') as f:
+    labels_voc = [line.rstrip() for line in f.readlines()]
+
+  bases = dict()
+  bases['coco'] = {'anchors': [0.57273, 0.677385, 1.87446, 2.06253, 3.33843,
+                               5.47434, 7.88282, 3.52778, 9.77052, 9.16828]}
+  bases['voc'] = {'anchors': [1.3221, 1.73145, 3.19275, 4.00944, 5.05587,
+                                  8.09892, 9.47112, 4.84053, 11.2364, 10.0071]}
+
+
+  opt = bases[model_name].copy()
+  opt.update({'num': len(opt['anchors']) // 2})
   if dataset_name=='voc':
-    bases = {}
-    labels_voc={1:'aeroplane',2:'bicycle',3:'bird',4:'boat',5:'bottle',6:'bus',7:'car',8:'cat',9:'chair',10:'cow',11:'diningtable',12:'dog',13:'horse',14:'motorbike',15:'person',16:'pottedplant',17:'sheep',18:'sofa',19:'train',20:'tvmonitor'}
-    bases['anchors'] =  [1.3221, 1.73145, 3.19275, 4.00944, 5.05587,
-                                      8.09892, 9.47112, 4.84053, 11.2364, 10.0071]
-
-    bases.update({'num': 5})
-    bases.update({'classes':20, 'labels': labels_voc})
+      opt.update({'classes': len(labels_voc), 'labels': labels_voc})
+  elif dataset_name=='coco'
+      opt.update({'classes': len(labels_coco), 'labels': labels_coco})
+  else raise Exception ('Dataset not supported')
+  return opt
   
-  return bases
 
-def model(inputs, is_training=True, lmbda=5e-4, dropout_rate=0): 
-  metas=meta()
+def model(inputs, stem_fn,dataset_name, scope='stem' ,is_training=True): 
+  metas=meta(dataset_name)
   N_classes=metas['classes']
   lmbda=lmbda+1e-10
 
   with tf.name_scope('stem'):
-    x = stem = nets.MobileNet50(inputs, is_training=True, stem=True,  scope='MobileNet50', lmbda=lmbda, dropout_rate=dropout_rate) #bulding the model
+    x = stem =  (inputs, is_training=True, stem=True,  scope=scope) #bulding the model
 
   p = x.p
 

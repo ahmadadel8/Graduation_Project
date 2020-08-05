@@ -20,9 +20,8 @@ import wget
 import sys
 import coco
 from pycocotools.coco import COCO
-from utils_mobilenetv1 import *
+from utils import *
 
-#ADDING THIS TO TEST THE GIT
 
 C1=[238, 72, 58, 24, 203, 230, 54, 167, 246, 136, 106, 95, 226, 171, 43, 159, 231, 101, 65, 157]
 C2=[122, 71, 173, 32, 147, 241, 53, 197, 228, 164, 4, 209, 175, 223, 176, 182, 48, 3, 70, 13]
@@ -61,7 +60,7 @@ coco_ann_dir='/home/alex054u3/data/coco_ann/'
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x, lmbda=0, dropout_rate=0)
+yolo=model(x,nets.MobileNet25, 'coco')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)

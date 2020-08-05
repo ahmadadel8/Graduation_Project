@@ -19,7 +19,7 @@ import shutil
 import wget
 import sys
 import voc
-from utils_mobilenetv1 import *
+from utils import *
 
 
 
@@ -60,7 +60,7 @@ voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x, lmbda=0, dropout_rate=0)
+yolo=model(x,nets.MobileNet25, 'voc')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)

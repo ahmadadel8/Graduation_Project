@@ -19,8 +19,7 @@ import shutil
 import wget
 import sys
 import voc
-from utils_mobilenetv1 import model as _YOLF
-from utils_mobilenetv2 import model as _YOLF_V2
+from utils import model 
 import time 
 from datetime import timedelta
 
@@ -32,15 +31,21 @@ N_classes=20
 is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
-YOLF=_YOLF(x)
-YOLF_V2 = _YOLF_V2(x)
+YOLF_V1=model(x,nets.MobileNet25,'voc')
+
+YOLF_V2=model(x,nets.MobileNet100v2, 'voc')
+
+YOLF_V2_50=model(x,nets.MobileNet50v2, 'voc')
+
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)
 YOLOv2=nets.YOLOv2COCO(x, is_training=False)
 YOLOv3=nets.YOLOv3VOC(x, is_training=False)
 
-t_diff_YOLF=[]
+t_diff_YOLF_V1=[]
 t_diff_YOLF_V2=[]
+t_diff_YOLF_V2_50=[]
+
 
 t_diff_TinyYOLOv2=[]
 t_diff_YOLOv2=[]
@@ -60,16 +65,17 @@ with tf.Session() as sess:
     for (img,_) in acc_data:
 
         ts=time.time()
-        acc_outs = sess.run(YOLF, {x: YOLF.preprocess(img),is_training: False})
-        t_diff_YOLF.append(time.time()-ts)
+        acc_outs = sess.run(YOLF_V1, {x: YOLF_V1.preprocess(img),is_training: False})
+        t_diff_YOLF_V1.append(time.time()-ts)
 
         ts=time.time()
         acc_outs = sess.run(YOLF_V2, {x: YOLF_V2.preprocess(img),is_training: False})
         t_diff_YOLF_V2.append(time.time()-ts)
 
-        #ts=time.time()
-        #acc_outs = sess.run(YOLF_V3_small, {x: YOLF_V3_small.preprocess(img),is_training: False})
-        #t_diff_YOLF_V3_small.append(time.time()-ts)
+        ts=time.time()
+        acc_outs = sess.run(YOLF_V2_50, {x: YOLF_V2_50.preprocess(img),is_training: False})
+        t_diff_YOLF_V2_50.append(time.time()-ts)
+
 
         ts=time.time()
         acc_outs = sess.run(TinyYOLOv2, {x: TinyYOLOv2.preprocess(img),is_training: False})
@@ -89,11 +95,15 @@ with tf.Session() as sess:
 
     print("=============================================")
 
-    print("YOLF FPS:", 1.0/np.mean(t_diff_YOLF))
+    print("YOLF_V1 FPS:", 1.0/np.mean(t_diff_YOLF_V1))
 
     print("=============================================")
     
     print("YOLF_V2 FPS:", 1.0/np.mean(t_diff_YOLF_V2))
+
+    print("=============================================")
+
+    print("YOLF_V2_50 FPS:", 1.0/np.mean(t_diff_YOLF_V2_50))
 
     print("=============================================")
 
