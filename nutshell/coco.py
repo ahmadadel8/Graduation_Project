@@ -134,7 +134,7 @@ def load_train(data_dir, ann_dir, data_name,
             processed_objs = []
             boxes=[]
 
-            while len(annotations[fileids[idx]] == 0): idx++
+            while (len(annotations[fileids[idx]]) == 0): idx++
             for obj in annotations[fileids[idx]]:
                 boxes.append(obj['bbox'])
 
