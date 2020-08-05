@@ -139,12 +139,17 @@ def load_train(data_dir, ann_dir, data_name,
                 boxes.append(obj['bbox'])
 
             boxes=np.array(boxes, dtype=np.float64)
-            transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.5), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
-            x, _boxes = transforms(x.copy(), boxes.copy())
+            transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
+            _x, _boxes = transforms(x.copy(), boxes.copy())
 
 
-            for bbox in _boxes:
-                bbox=[max(min(bbox[0], h), 0), max(min(bbox[1], w), 0), max(min(bbox[2], h), 0), max(min(bbox[3], w), 0)]
+            for (b,bbox) in enumerate(_boxes):
+                bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0)]
+                if ((bbox[2] < bbox[0]) | (bbox[3] < bbox[1])):
+                  print('sqrt err \n ', bbox)
+                  bbox=[0,0,0,0]
+                  _boxes[b]=bbox
+
                 centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
                 centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
                 cx = centerx / cellx
