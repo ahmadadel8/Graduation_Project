@@ -275,7 +275,7 @@ def load_train(data_dir, data_name,
             print(boxes, _boxes)
 
             for bbox in _boxes:
-                bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0)]
+                bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0), bbox[-1]]
                 if ((bbox[2] < bbox[0]) | (bbox[3] < bbox[1])):
                   print('sqrt err \n ', bbox)
 
