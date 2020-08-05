@@ -96,6 +96,9 @@ def load_train(data_dir, ann_dir, data_name,
     total_num = len(fileids)
     annotations=get_annotations(data_dir, data_name, fileids)
 
+    for f in files:
+        annotations[f] = reduce(lambda x, y: x + y, annotations[f])
+
     if isinstance(target_size, int):
         target_size = (target_size, target_size)
     feature_size = [x // 32 for x in target_size]
