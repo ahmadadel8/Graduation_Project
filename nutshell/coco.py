@@ -22,9 +22,19 @@ except ImportError:
     COCO = None
 
 try:
+    import cv2
+except ImportError:
+    cv2 = None
+
+try:
     xrange          # Python 2
 except NameError:
     xrange = range  # Python 3
+
+try:
+    reduce
+except NameError:
+    from functools import reduce
 
 
 metas = {}

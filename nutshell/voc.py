@@ -75,7 +75,6 @@ def get_annotations(data_dir, files):
                                   int(bbox.find('xmax').text),
                                   int(bbox.find('ymax').text)]
             cidx = classidx(obj_struct['name'])
-            print(cidx, obj_struct['name'])
             annotations[filename][cidx].append(obj_struct)
     return annotations
 
@@ -268,9 +267,8 @@ def load_train(data_dir, data_name,
             boxes=[]
             for obj in annotations[f]:
                 tbox=obj['bbox']
-                tbox.append(classidx(obj['name']))
+                tbox.append(obj['name'])
                 boxes.append(tbox)
-            print(tbox)
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             _x, _boxes = transforms(x.copy(), boxes.copy())
@@ -289,7 +287,7 @@ def load_train(data_dir, data_name,
                     if cx >= feature_size[1] or cy >= feature_size[0]:
                         continue
                     processed_objs += [[
-                        int(bbox[-1]),
+                        classidx(bbox[-1]),
                         cx - np.floor(cx),  # centerx
                         cy - np.floor(cy),  # centery
                         np.sqrt(float(bbox[2] - bbox[0]) / w),
