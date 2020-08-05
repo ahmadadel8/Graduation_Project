@@ -288,13 +288,14 @@ def load_train(data_dir, data_name,
                     if cx >= feature_size[1] or cy >= feature_size[0]:
                         continue
                     processed_objs += [[
-                        bbox[-1],
+                        int(bbox[-1]),
                         cx - np.floor(cx),  # centerx
                         cy - np.floor(cy),  # centery
                         np.sqrt(float(bbox[2] - bbox[0]) / w),
                         np.sqrt(float(bbox[3] - bbox[1]) / h),
                         int(np.floor(cy) * feature_size[1] + np.floor(cx))
                     ]]
+                    
             # Calculate placeholders' values
             for obj in processed_objs:
                 probs[i, obj[5], :, :] = [[0.] * classes] * anchors
