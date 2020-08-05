@@ -171,7 +171,7 @@ def load_train(data_dir, ann_dir, data_name,
 	                if cx >= feature_size[1] or cy >= feature_size[0]:
 	                    continue
 	                processed_objs += [[
-	                    bbox[-1],
+                        int(bbox[-1]),
 	                    cx - np.floor(cx),  # centerx
 	                    cy - np.floor(cy),  # centery
 	                    np.sqrt(float(bbox[2] - bbox[0]) / w),
