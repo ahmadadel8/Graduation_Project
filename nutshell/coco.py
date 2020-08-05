@@ -139,7 +139,7 @@ def load_train(data_dir, ann_dir, data_name,
                 boxes.append(obj['bbox'])
 
             boxes=np.array(boxes, dtype=np.float64)
-            print(boxes.shape())
+            print(boxes.shape)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.5), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             x, _boxes = transforms(x.copy(), boxes.copy())
 
