@@ -138,7 +138,7 @@ def load_train(data_dir, ann_dir, data_name,
             for obj in annotations[f]:
                 tbox=obj['bbox']
                 tbox.append(classidx(obj['name']))
-            	boxes.append(tbox)
+                boxes.append(tbox)
 
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
