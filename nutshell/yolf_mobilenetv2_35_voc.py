@@ -126,7 +126,8 @@ with tf.Session() as sess:
     for btch, (imgs, metas) in enumerate(trains):
       # `trains` returns None when it covers the full batch once
       print('batch', btch, 'done')
-      if imgs is None: break      metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
+      if imgs is None: break      
+      metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
       outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
