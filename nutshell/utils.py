@@ -26,23 +26,22 @@ def darkdepthsepconv(inputs, filters, kernel, name, lmbda=5e-4, dropout_rate=0):
     
 
 
+with open(os.path.join(os.path.dirname(__file__), 'coco.names'), 'r') as f:
+  labels_coco = [line.rstrip() for line in f.readlines()]
+
+with open(os.path.join(os.path.dirname(__file__), 'voc.names'), 'r') as f:
+  labels_voc = [line.rstrip() for line in f.readlines()]
+
+bases = dict()
+bases['coco'] = {'anchors': [0.57273, 0.677385, 1.87446, 2.06253, 3.33843,
+                             5.47434, 7.88282, 3.52778, 9.77052, 9.16828]}
+bases['voc'] = {'anchors': [1.3221, 1.73145, 3.19275, 4.00944, 5.05587,
+                                8.09892, 9.47112, 4.84053, 11.2364, 10.0071]}
 
 def meta(dataset_name='voc'):
 
-  with open(os.path.join(os.path.dirname(__file__), 'coco.names'), 'r') as f:
-    labels_coco = [line.rstrip() for line in f.readlines()]
 
-  with open(os.path.join(os.path.dirname(__file__), 'voc.names'), 'r') as f:
-    labels_voc = [line.rstrip() for line in f.readlines()]
-
-  bases = dict()
-  bases['coco'] = {'anchors': [0.57273, 0.677385, 1.87446, 2.06253, 3.33843,
-                               5.47434, 7.88282, 3.52778, 9.77052, 9.16828]}
-  bases['voc'] = {'anchors': [1.3221, 1.73145, 3.19275, 4.00944, 5.05587,
-                                  8.09892, 9.47112, 4.84053, 11.2364, 10.0071]}
-
-
-  opt = bases[model_name].copy()
+  opt = bases[dataset_name].copy()
   opt.update({'num': len(opt['anchors']) // 2})
   if dataset_name=='voc':
       opt.update({'classes': len(labels_voc), 'labels': labels_voc})
