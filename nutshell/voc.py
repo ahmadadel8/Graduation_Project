@@ -75,6 +75,7 @@ def get_annotations(data_dir, files):
                                   int(bbox.find('xmax').text),
                                   int(bbox.find('ymax').text)]
             cidx = classidx(obj_struct['name'])
+            print(cidx, obj_struct['name'])
             annotations[filename][cidx].append(obj_struct)
     return annotations
 
