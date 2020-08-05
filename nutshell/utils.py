@@ -43,9 +43,9 @@ def meta(dataset_name='voc'):
   opt.update({'num': len(opt['anchors']) // 2})
   if dataset_name=='voc':
       opt.update({'classes': len(labels_voc), 'labels': labels_voc})
-  elif dataset_name=='coco'
+  elif dataset_name=='coco':
       opt.update({'classes': len(labels_coco), 'labels': labels_coco})
-  else raise Exception ('Dataset not supported')
+  else: raise Exception ('Dataset not supported')
   return opt
   
 
