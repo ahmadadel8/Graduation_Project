@@ -1,10 +1,26 @@
-2020-08-04 17:45:53.868853: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer.so.6'; dlerror: libnvinfer.so.6: cannot open shared object file: No such file or directory
-2020-08-04 17:45:53.869387: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libnvinfer_plugin.so.6'; dlerror: libnvinfer_plugin.so.6: cannot open shared object file: No such file or directory
-2020-08-04 17:45:53.869431: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:30] Cannot dlopen some TensorRT libraries. If you would like to use Nvidia GPU with TensorRT, please make sure the missing libraries mentioned above are installed properly.
-Traceback (most recent call last):
-  File "nutshell/yolf_mobilenetv1_coco.py", line 21, in <module>
-    import coco
-  File "/lfs01/workdirs/alex054u3/nutshell/coco.py", line 135
-    for obj in annotations[fileids[idx]]
-                                       ^
-SyntaxError: invalid syntax
+2020-08-05 18:38:29.837642: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-08-05 18:38:34.725147: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
+pciBusID: 0000:06:00.0
+totalMemory: 11.17GiB freeMemory: 11.11GiB
+2020-08-05 18:38:34.725261: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2020-08-05 18:38:35.054860: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-08-05 18:38:35.054993: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2020-08-05 18:38:35.055016: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2020-08-05 18:38:35.055139: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
+  0%|          | 0/233 [00:00<?, ?it/s]loading annotations into memory...
+Done (t=16.84s)
+creating index...
+index created!
+sqrt err 
+  [640, 427, 639.278145947044, 427.0, 44.0]
+/lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:83: RuntimeWarning: invalid value encountered in true_divide
+  delta_area = ((ar_ - bbox_area(bbox))/ar_)
+/lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:85: RuntimeWarning: invalid value encountered in less
+  mask = (delta_area < (1 - alpha)).astype(int)
+sqrt err 
+  [640, 0.0, 637.5175707930318, 0, 2.0]
+sqrt err 
+  [615.3977954079933, 0.0, 596.0065949252152, 0, 9.0]
+sqrt err 
+  [610.7423692559038, 0.0, 574.937398164557, 0, 43.0]
