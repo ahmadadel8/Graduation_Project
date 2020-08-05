@@ -87,8 +87,8 @@ def get_annotations(data_dir, data_name, ids):
             x2 = np.min((width - 1, x1 + np.max((0, obj['bbox'][2] - 1))))
             y2 = np.min((height - 1, y1 + np.max((0, obj['bbox'][3] - 1))))
             if obj['area'] > 0 and x2 >= x1 and y2 >= y1:
-                obj_struct = {'bbox': [x1, y1, x2, y2]}
                 cidx = cmap[obj['category_id']]
+                obj_struct = {'bbox': [x1, y1, x2, y2], 'classidx': cidx}
                 annotations[i][cidx].append(obj_struct)
     return annotations
 
@@ -150,7 +150,7 @@ def load_train(data_dir, ann_dir, data_name,
             while (len(annotations[fileids[idx]]) == 0): idx+=1
             for obj in annotations[fileids[idx]]:
                 tbox=obj['bbox']
-                tbox.append(cmap[obj['category_id']])
+                tbox.append(obj['classidx'])
                 boxes.append(tbox)
 
             boxes=np.array(boxes, dtype=np.float64)
@@ -159,7 +159,7 @@ def load_train(data_dir, ann_dir, data_name,
 
 
             for bbox in _boxes:
-                bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0)]
+                bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0), bbox[-1]]
                 if ((bbox[2] < bbox[0]) | (bbox[3] < bbox[1])):
                   print('sqrt err \n ', bbox)
 
