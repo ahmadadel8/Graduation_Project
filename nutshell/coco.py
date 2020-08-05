@@ -85,7 +85,7 @@ def get_annotations(data_dir, data_name, ids):
 
 def load_train(data_dir, ann_dir, data_name, 
                batch_size=64, shuffle=True,
-               target_size=416, anchors=5, classes=20,
+               target_size=416, anchors=5, classes=80,
                total_num=None, dtype=np.float32):
 
 
