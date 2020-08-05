@@ -67,7 +67,7 @@ def get_annotations(data_dir, data_name, ids):
     for i in ids:
         annids = metas[data_name].getAnnIds(imgIds=i, iscrowd=None)
         objs = metas[data_name].loadAnns(annids)
-        annotations[i] = []
+        annotations[i] = [[] for _ in range(80)]
         width = metas[data_name].imgs[i]['width']
         height = metas[data_name].imgs[i]['height']
         valid_objs = []
@@ -77,9 +77,9 @@ def get_annotations(data_dir, data_name, ids):
             x2 = np.min((width - 1, x1 + np.max((0, obj['bbox'][2] - 1))))
             y2 = np.min((height - 1, y1 + np.max((0, obj['bbox'][3] - 1))))
             if obj['area'] > 0 and x2 >= x1 and y2 >= y1:
+                obj_struct = {'bbox': [x1, y1, x2, y2]}
                 cidx = cmap[obj['category_id']]
-                obj_struct = {'bbox': [x1, y1, x2, y2], 'classid': cidx}
-                annotations[i].append(obj_struct)
+                annotations[i][cidx].append(obj_struct)
     return annotations
 
 
@@ -135,35 +135,36 @@ def load_train(data_dir, ann_dir, data_name,
             boxes=[]
 
             while (len(annotations[fileids[idx]]) == 0): idx+=1
-            for obj in annotations[fileids[idx]]:
-                boxes.append(obj['bbox'])
+            for obj in annotations[f]:
+                tbox=obj['bbox']
+                tbox.append(classidx(obj['name']))
+            	boxes.append(tbox)
 
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             _x, _boxes = transforms(x.copy(), boxes.copy())
 
 
-            for (b,bbox) in enumerate(_boxes):
+            for bbox in _boxes:
                 bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0)]
                 if ((bbox[2] < bbox[0]) | (bbox[3] < bbox[1])):
                   print('sqrt err \n ', bbox)
-                  bbox=[0,0,0,0]
-                  _boxes[b]=bbox
 
-                centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
-                centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
-                cx = centerx / cellx
-                cy = centery / celly
-                if cx >= feature_size[1] or cy >= feature_size[0]:
-                    continue
-                processed_objs += [[
-                    obj['classid'],
-                    cx - np.floor(cx),  # centerx
-                    cy - np.floor(cy),  # centery
-                    np.sqrt(float(bbox[2] - bbox[0]) / w),
-                    np.sqrt(float(bbox[3] - bbox[1]) / h),
-                    int(np.floor(cy) * feature_size[1] + np.floor(cx))
-                ]]
+                else:
+	                centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
+	                centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
+	                cx = centerx / cellx
+	                cy = centery / celly
+	                if cx >= feature_size[1] or cy >= feature_size[0]:
+	                    continue
+	                processed_objs += [[
+	                    bbox[-1],
+	                    cx - np.floor(cx),  # centerx
+	                    cy - np.floor(cy),  # centery
+	                    np.sqrt(float(bbox[2] - bbox[0]) / w),
+	                    np.sqrt(float(bbox[3] - bbox[1]) / h),
+	                    int(np.floor(cy) * feature_size[1] + np.floor(cx))
+	                ]]
 
             # Calculate placeholders' values
             for obj in processed_objs:

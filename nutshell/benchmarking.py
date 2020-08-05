@@ -31,11 +31,9 @@ N_classes=20
 is_training = tf.placeholder(tf.bool)
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
 
-YOLF_V1=model(x,nets.MobileNet25,'voc')
-
-YOLF_V2=model(x,nets.MobileNet100v2, 'voc')
-
-YOLF_V2_50=model(x,nets.MobileNet50v2, 'voc')
+YOLF_V1=model(x,nets.MobileNet25,'voc', scope='YOLF_V1')
+YOLF_V2=model(x,nets.MobileNet100v2, 'voc', scope='YOLF_V2')
+YOLF_V2_50=model(x,nets.MobileNet50v2, 'voc', scope='YOLF_V2_tiny')
 
 
 TinyYOLOv2=nets.TinyYOLOv2VOC(x, is_training=False)

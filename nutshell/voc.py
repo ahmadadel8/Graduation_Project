@@ -266,36 +266,35 @@ def load_train(data_dir, data_name,
             processed_objs = []
             boxes=[]
             for obj in annotations[f]:
-            	boxes.append(obj['bbox'])
+                tbox=obj['bbox']
+                tbox.append(classidx(obj['name']))
+            	boxes.append(tbox)
 
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             _x, _boxes = transforms(x.copy(), boxes.copy())
 
 
-            for (b,bbox) in enumerate(_boxes):
+            for bbox in _boxes:
                 bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0)]
                 if ((bbox[2] < bbox[0]) | (bbox[3] < bbox[1])):
                   print('sqrt err \n ', bbox)
-                  bbox=[0,0,0,0]
-                  _boxes[b]=bbox
 
-
-                centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
-                centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
-                cx = centerx / cellx
-                cy = centery / celly
-                if cx >= feature_size[1] or cy >= feature_size[0]:
-                    continue
-                processed_objs += [[
-                    classidx(obj['name']),
-                    cx - np.floor(cx),  # centerx
-                    cy - np.floor(cy),  # centery
-                    np.sqrt(float(bbox[2] - bbox[0]) / w),
-                    np.sqrt(float(bbox[3] - bbox[1]) / h),
-                    int(np.floor(cy) * feature_size[1] + np.floor(cx))
-                ]]
-
+                else:
+                    centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
+                    centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
+                    cx = centerx / cellx
+                    cy = centery / celly
+                    if cx >= feature_size[1] or cy >= feature_size[0]:
+                        continue
+                    processed_objs += [[
+                        bbox[-1],
+                        cx - np.floor(cx),  # centerx
+                        cy - np.floor(cy),  # centery
+                        np.sqrt(float(bbox[2] - bbox[0]) / w),
+                        np.sqrt(float(bbox[3] - bbox[1]) / h),
+                        int(np.floor(cy) * feature_size[1] + np.floor(cx))
+                    ]]
             # Calculate placeholders' values
             for obj in processed_objs:
                 probs[i, obj[5], :, :] = [[0.] * classes] * anchors
