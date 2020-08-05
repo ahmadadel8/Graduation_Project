@@ -135,7 +135,7 @@ def load_train(data_dir, ann_dir, data_name,
             boxes=[]
 
             while (len(annotations[fileids[idx]]) == 0): idx+=1
-            for obj in annotations[fileids[idx]:
+            for obj in annotations[fileids[idx]]:
                 tbox=obj['bbox']
                 tbox.append(classidx(obj['name']))
                 boxes.append(tbox)

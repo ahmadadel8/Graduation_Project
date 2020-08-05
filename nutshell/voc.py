@@ -269,7 +269,7 @@ def load_train(data_dir, data_name,
                 tbox=obj['bbox']
                 tbox.append(classidx(obj['name']))
                 boxes.append(tbox)
-
+            print(tbox)
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             _x, _boxes = transforms(x.copy(), boxes.copy())
@@ -295,7 +295,7 @@ def load_train(data_dir, data_name,
                         np.sqrt(float(bbox[3] - bbox[1]) / h),
                         int(np.floor(cy) * feature_size[1] + np.floor(cx))
                     ]]
-                    
+
             # Calculate placeholders' values
             for obj in processed_objs:
                 probs[i, obj[5], :, :] = [[0.] * classes] * anchors
