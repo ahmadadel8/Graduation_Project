@@ -272,7 +272,6 @@ def load_train(data_dir, data_name,
             boxes=np.array(boxes, dtype=np.float64)
             transforms = Sequence([RandomHSV(40, 40, 30), RandomHorizontalFlip(0.5),RandomTranslate(np.random.uniform(0,0.2), diff = True), RandomShear(np.random.uniform(-0.5,0.5))])
             _x, _boxes = transforms(x.copy(), boxes.copy())
-            print(boxes, _boxes)
 
             for bbox in _boxes:
                 bbox=[max(min(bbox[0], w), 0), max(min(bbox[1], h), 0), max(min(bbox[2], w), 0), max(min(bbox[3], h), 0), bbox[-1]]

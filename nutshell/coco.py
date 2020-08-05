@@ -150,7 +150,7 @@ def load_train(data_dir, ann_dir, data_name,
             while (len(annotations[fileids[idx]]) == 0): idx+=1
             for obj in annotations[fileids[idx]]:
                 tbox=obj['bbox']
-                tbox.append(classidx(obj['name']))
+                tbox.append(cmap[obj['category_id']])
                 boxes.append(tbox)
 
             boxes=np.array(boxes, dtype=np.float64)
