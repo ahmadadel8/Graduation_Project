@@ -18,9 +18,9 @@ import tarfile
 import shutil
 import wget
 import sys
-import coco
-from pycocotools.coco import COCO
+import voc
 from utils import *
+
 
 
 C1=[238, 72, 58, 24, 203, 230, 54, 167, 246, 136, 106, 95, 226, 171, 43, 159, 231, 101, 65, 157]
@@ -54,13 +54,13 @@ def visualize_img(img,bboxes,thickness,name):
 
 tf.reset_default_graph() # It's importat to resume training from latest checkpoint 
 
-coco_dir = '/lfs02/datasets/coco/'
-coco_ann_dir='/home/alex054u3/data/coco_ann/'
+voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
+
 # Define the model hyper parameters
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x,nets.MobileNet25, 'coco')
+yolo=model(x,nets.MobileNet25, 'voc')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
@@ -72,7 +72,7 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_coco"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_voc"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
@@ -82,10 +82,11 @@ if not os.path.exists(checkpoint_path):
 init_op     = tf.global_variables_initializer()
 train_saver = tf.train.Saver(max_to_keep=2)
 
-def evaluate_accuracy(data_type='tr', edition='2017'):
-  if (data_type  == 'tr'): acc_data  = coco.load(coco_dir, coco_ann_dir ,'train%d' % edition)
-  elif(data_type == 'te') : acc_data  = coco.load(coco_dir, coco_ann_dir, 'val%d' % edition)
+def evaluate_accuracy(data_type='tr'):
+  if (data_type  == 'tr'): acc_data  = voc.load(voc_dir % 2007,'trainval')
+  elif(data_type == 'te') : acc_data  = voc.load(voc_dir % 2007, 'test')
   
+  #print('Train Accuracy: ',voc.evaluate(boxes, voc_dir % 2007, 'trainval'))
   results = []
   idx     = np.random.randint(100)
   for i,(img,_) in enumerate(acc_data):
@@ -96,9 +97,10 @@ def evaluate_accuracy(data_type='tr', edition='2017'):
       img_vis=img
       boxes_vis=boxes
   if (data_type  =='tr'):
-    eval_print=coco.evaluate(results, coco_dir ,'train%d' % edition)
+    eval_print=voc.evaluate(results, voc_dir % 2007, 'trainval')
   elif (data_type=='te'):
-    eval_print=coco.evaluate(results, coco_dir ,'val%d' % edition)
+    #visualize_img(yolo.preprocess(img_vis)*255,boxes_vis,5,'img')
+    eval_print=voc.evaluate(results, voc_dir % 2007, 'test')
   print('\n')
   print(eval_print)
   return eval_print
@@ -107,8 +109,6 @@ acc_best, best_epoch=0.0, 0
 
 
 with tf.Session() as sess:
-
-  edition=2017
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
   if (len(ckpt_files)!=0):
     train_saver.restore(sess,checkpoint_prefix)
@@ -117,16 +117,16 @@ with tf.Session() as sess:
     sess.run(yolo.stem.pretrained())
 
   for i in tqdm(range(step.eval(),233)):
-    # Iterate on COCO2017 s once
+    # Iterate on VOC07+12 trainval once
     losses = []
 
-    trains = coco.load_train(coco_dir, coco_ann_dir, 'train%d' %edition , batch_size=48)
+    trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
 
     sess.run(step.assign(i))
     
     for btch, (imgs, metas) in enumerate(trains):
       # `trains` returns None when it covers the full batch once
-      if imgs is None: break  
+      if imgs is None: break         
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
       outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
@@ -134,8 +134,8 @@ with tf.Session() as sess:
     
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
-    tr_ac=evaluate_accuracy('tr', edition=edition)
-    ts_ac=evaluate_accuracy('te', edition=edition)
+    tr_ac=evaluate_accuracy('tr')
+    ts_ac=evaluate_accuracy('te')
     print ('\n')    
 
     acc =float(ts_ac.split(' = ')[-1])
