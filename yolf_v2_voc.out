@@ -8,7 +8,11 @@ totalMemory: 11.17GiB freeMemory: 11.11GiB
 2020-08-05 18:54:51.572097: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
 2020-08-05 18:54:51.572121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
 2020-08-05 18:54:51.572240: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
+<<<<<<< HEAD
   0%|          | 0/233 [00:00<?, ?it/s]2020-08-05 18:55:08.153674: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+=======
+  0%|          | 0/233 [00:00<?, ?it/s]2020-08-05 18:55:08.153674: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 2020-08-05 18:55:08.258215: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
 2020-08-05 18:55:08.461417: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.92GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
 2020-08-05 18:55:08.555764: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.84GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
@@ -33,7 +37,11 @@ Mean = 0.0000
 highest training accuacy: 0.0 at epoch: 0 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   0%|          | 1/233 [18:03<69:49:07, 1083.40s/it]sqrt err 
+=======
+  0%|          | 1/233 [18:03<69:49:07, 1083.40s/it]sqrt err 
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
   [500, 375, 499.6368278628712, 375.0, 6.0]
 
 epoch: 1 lr:  1e-04 loss: 29.046701
@@ -54,7 +62,11 @@ Mean = 0.0000
 highest training accuacy: 0.0 at epoch: 0 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   1%|          | 2/233 [35:52<69:14:04, 1078.98s/it]
+=======
+  1%|          | 2/233 [35:52<69:14:04, 1078.98s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 epoch: 2 lr:  0.001 loss: 7.6698303
 
 
@@ -73,7 +85,11 @@ Mean = 0.0005
 highest training accuacy: 0.0005 at epoch: 2 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   1%|▏         | 3/233 [53:46<68:50:34, 1077.54s/it]
+=======
+  1%|▏         | 3/233 [53:46<68:50:34, 1077.54s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 epoch: 3 lr:  0.001 loss: 7.433977
 
 
@@ -92,7 +108,11 @@ Mean = 0.0011
 highest training accuacy: 0.0011 at epoch: 3 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   2%|▏         | 4/233 [1:11:41<68:29:58, 1076.85s/it]
+=======
+  2%|▏         | 4/233 [1:11:41<68:29:58, 1076.85s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 epoch: 4 lr:  0.001 loss: 7.2867174
 
 
@@ -111,7 +131,11 @@ Mean = 0.0061
 highest training accuacy: 0.0061 at epoch: 4 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   2%|▏         | 5/233 [1:29:34<68:07:11, 1075.58s/it]
+=======
+  2%|▏         | 5/233 [1:29:34<68:07:11, 1075.58s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 epoch: 5 lr:  0.001 loss: 7.1997213
 
 
@@ -130,7 +154,11 @@ Mean = 0.0045
 highest training accuacy: 0.0061 at epoch: 4 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   3%|▎         | 6/233 [1:47:26<67:45:16, 1074.52s/it]sqrt err 
+=======
+  3%|▎         | 6/233 [1:47:26<67:45:16, 1074.52s/it]sqrt err 
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
   [79.40676689091944, 338, 69.26973281973824, 338.0, 6.0]
 
 epoch: 6 lr:  0.001 loss: 7.1041217
@@ -151,7 +179,11 @@ Mean = 0.0136
 highest training accuacy: 0.0136 at epoch: 6 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   3%|▎         | 7/233 [2:05:18<67:24:38, 1073.80s/it]sqrt err 
+=======
+  3%|▎         | 7/233 [2:05:18<67:24:38, 1073.80s/it]sqrt err 
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
   [272.64694728684793, 0.0, 259.15660354088413, 0, 2.0]
 
 epoch: 7 lr:  0.001 loss: 7.043541
@@ -172,7 +204,11 @@ Mean = 0.0155
 highest training accuacy: 0.0155 at epoch: 7 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   3%|▎         | 8/233 [2:23:10<67:04:55, 1073.31s/it]
+=======
+  3%|▎         | 8/233 [2:23:10<67:04:55, 1073.31s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc
 epoch: 8 lr:  0.001 loss: 7.009256
 
 
@@ -191,4 +227,8 @@ Mean = 0.0238
 highest training accuacy: 0.0238 at epoch: 8 
 
 =================================================================================================================================================================================
+<<<<<<< HEAD
   4%|▍         | 9/233 [2:41:00<66:42:56, 1072.22s/it]slurmstepd: error: *** JOB 81419 ON comp001 CANCELLED AT 2020-08-05T21:39:00 ***
+=======
+  4%|▍         | 9/233 [2:41:00<66:42:56, 1072.22s/it]
+>>>>>>> 6ada49325eeb9e2b15dc74af8b738fbfb4a557dc

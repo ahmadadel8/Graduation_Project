@@ -82,8 +82,8 @@ init_op     = tf.global_variables_initializer()
 train_saver = tf.train.Saver(max_to_keep=2)
 
 def evaluate_accuracy(data_type='tr'):
-  if (data_type  == 'tr'): acc_data  = voc.load(voc_dir % 2007,'trainval',total_num =100)
-  elif(data_type == 'te') : acc_data  = voc.load(voc_dir % 2007, 'test', total_num=100)
+  if (data_type  == 'tr'): acc_data  = voc.load(voc_dir % 2007,'trainval')
+  elif(data_type == 'te') : acc_data  = voc.load(voc_dir % 2007, 'test')
   
   #print('Train Accuracy: ',voc.evaluate(boxes, voc_dir % 2007, 'trainval'))
   results = []

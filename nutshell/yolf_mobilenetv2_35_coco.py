@@ -72,7 +72,7 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_coco"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_35_coco"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
@@ -83,8 +83,8 @@ init_op     = tf.global_variables_initializer()
 train_saver = tf.train.Saver(max_to_keep=2)
 
 def evaluate_accuracy(data_type='tr', edition='2017'):
-  if (data_type  == 'tr'): acc_data  = coco.load(coco_dir, coco_ann_dir ,'train%d' % edition,total_num =100)
-  elif(data_type == 'te') : acc_data  = coco.load(coco_dir, coco_ann_dir, 'val%d' % edition, total_num=100)
+  if (data_type  == 'tr'): acc_data  = coco.load(coco_dir, coco_ann_dir ,'train%d' % edition)
+  elif(data_type == 'te') : acc_data  = coco.load(coco_dir, coco_ann_dir, 'val%d' % edition)
   
   results = []
   idx     = np.random.randint(100)
