@@ -60,7 +60,7 @@ voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x,nets.MobileNet25, 'voc')
+yolo=model(x,nets.MobileNet50, 'voc')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
@@ -72,7 +72,7 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_voc"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_50_voc"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
