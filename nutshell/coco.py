@@ -57,7 +57,7 @@ def area(box):
 def get_files(data_dir, data_name, total_num=None):
     assert COCO is not None, '`datasets.coco` requires `pycocotools`.'
     if data_name not in metas:
-        metas[data_name] = COCO("%sannotations/instances_%s.json" %
+        metas[data_name] = COCO("%s/annotations/instances_%s.json" %
                                 (data_dir, data_name))
     images = metas[data_name].imgs
     fileids = list(images.keys())
@@ -104,7 +104,7 @@ def load_train(data_dir, ann_dir, data_name,
     fileids,files=get_files(ann_dir, data_name, total_num=None)
     
     total_num = len(fileids)
-    annotations=get_annotations(data_dir, data_name, fileids)
+    annotations=get_annotations(ann_dir, data_name, fileids)
 
     for f in fileids:
         annotations[f] = reduce(lambda x, y: x + y, annotations[f])
@@ -164,20 +164,20 @@ def load_train(data_dir, ann_dir, data_name,
                   print('sqrt err \n ', bbox)
 
                 else:
-	                centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
-	                centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
-	                cx = centerx / cellx
-	                cy = centery / celly
-	                if cx >= feature_size[1] or cy >= feature_size[0]:
-	                    continue
-	                processed_objs += [[
+                    centerx = .5 * (bbox[0] + bbox[2])  # xmin, xmax
+                    centery = .5 * (bbox[1] + bbox[3])  # ymin, ymax
+                    cx = centerx / cellx
+                    cy = centery / celly
+                    if cx >= feature_size[1] or cy >= feature_size[0]:
+                        continue
+                    processed_objs += [[
                         int(bbox[-1]),
-	                    cx - np.floor(cx),  # centerx
-	                    cy - np.floor(cy),  # centery
-	                    np.sqrt(float(bbox[2] - bbox[0]) / w),
-	                    np.sqrt(float(bbox[3] - bbox[1]) / h),
-	                    int(np.floor(cy) * feature_size[1] + np.floor(cx))
-	                ]]
+                        cx - np.floor(cx),  # centerx
+                        cy - np.floor(cy),  # centery
+                        np.sqrt(float(bbox[2] - bbox[0]) / w),
+                        np.sqrt(float(bbox[3] - bbox[1]) / h),
+                        int(np.floor(cy) * feature_size[1] + np.floor(cx))
+                    ]]
 
             # Calculate placeholders' values
             for obj in processed_objs:
@@ -288,10 +288,10 @@ def evaluate_class(ids, scores, boxes, annotations, files, ovthresh):
     return ap, precision, recall
 
 
-def evaluate(results, data_dir, data_name, ovthresh=0.5, verbose=True):
-    fileids, _ = get_files(data_dir, data_name)
+def evaluate(results, data_dir,ann_dir, data_name, ovthresh=0.5, verbose=True):
+    fileids, _ = get_files(ann_dir, data_name)
     fileids = fileids[:len(results)]
-    annotations = get_annotations(data_dir, data_name, fileids)
+    annotations = get_annotations(ann_dir, data_name, fileids)
     aps = []
 
     for c in range(80):

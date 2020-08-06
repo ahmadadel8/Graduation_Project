@@ -96,9 +96,9 @@ def evaluate_accuracy(data_type='tr', edition='2017'):
       img_vis=img
       boxes_vis=boxes
   if (data_type  =='tr'):
-    eval_print=coco.evaluate(results, coco_dir ,'train%d' % edition)
+    eval_print=coco.evaluate(results, coco_dir, coco_ann_dir ,'train%d' % edition)
   elif (data_type=='te'):
-    eval_print=coco.evaluate(results, coco_dir ,'val%d' % edition)
+    eval_print=coco.evaluate(results, coco_dir, coco_ann_dir ,'val%d' % edition)
   print('\n')
   print(eval_print)
   return eval_print
