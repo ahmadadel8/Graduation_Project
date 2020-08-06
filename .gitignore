@@ -3,3 +3,4 @@ bin
 nutshell/__pycache
 pip_cache
 lib
+nutshell/training_trial_step_mobilenetv2_voc/
