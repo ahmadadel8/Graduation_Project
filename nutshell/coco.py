@@ -57,7 +57,7 @@ def area(box):
 def get_files(data_dir, data_name, total_num=None):
     assert COCO is not None, '`datasets.coco` requires `pycocotools`.'
     if data_name not in metas:
-        metas[data_name] = COCO("%s/annotations/instances_%s.json" %
+        metas[data_name] = COCO("%sannotations/instances_%s.json" %
                                 (data_dir, data_name))
     images = metas[data_name].imgs
     fileids = list(images.keys())
@@ -210,7 +210,7 @@ def load_train(data_dir, ann_dir, data_name,
 def load(data_dir, ann_dir, data_name, min_shorter_side=None, max_longer_side=1000,
          batch_size=1, total_num=None):
     assert cv2 is not None, '`load` requires `cv2`.'
-    _, files = get_files(data_dir, data_name, total_num)
+    _, files = get_files(ann_dir, data_name, total_num)
     total_num = len(files)
 
     for batch_start in range(0, total_num, batch_size):
