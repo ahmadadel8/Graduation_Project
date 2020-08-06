@@ -1,31 +1,132 @@
-2020-08-05 18:38:17.651360: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
-2020-08-05 18:38:22.537255: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+2020-08-05 19:10:27.868223: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-08-05 19:10:32.757369: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
 name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
 pciBusID: 0000:06:00.0
 totalMemory: 11.17GiB freeMemory: 11.11GiB
-2020-08-05 18:38:22.537368: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
-2020-08-05 18:38:22.866463: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
-2020-08-05 18:38:22.866596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
-2020-08-05 18:38:22.866619: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
-2020-08-05 18:38:22.866735: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
+2020-08-05 19:10:32.757474: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2020-08-05 19:10:38.036433: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-08-05 19:10:38.036583: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2020-08-05 19:10:38.036612: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2020-08-05 19:10:38.036763: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
   0%|          | 0/233 [00:00<?, ?it/s]loading annotations into memory...
-Done (t=16.62s)
+Done (t=16.92s)
 creating index...
 index created!
-2020-08-05 18:39:46.109185: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.212326: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.306763: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1.04GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.353132: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1002.73MiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.390488: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 969.40MiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.462400: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.92GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.555674: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.84GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.635896: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:39:46.710167: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.28GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.225034: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.328776: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.424546: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1.04GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.471043: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 1002.73MiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.508632: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 969.40MiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.570926: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.92GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.663799: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.84GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.743620: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 19:12:04.818162: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.28GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
 /lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:83: RuntimeWarning: invalid value encountered in true_divide
   delta_area = ((ar_ - bbox_area(bbox))/ar_)
 /lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:85: RuntimeWarning: invalid value encountered in less
   mask = (delta_area < (1 - alpha)).astype(int)
 sqrt err 
-  [47.42104388710194, 427, 41.66543091335369, 427.0, 0.0]
+  [640, 468, 639.693434978393, 468.0, 60.0]
 sqrt err 
-  [47.42104388710194, 427, 30.144906721957746, 427.0, 0.0]
+  [333, 500, 332.2325755150823, 500.0, 2.0]
+sqrt err 
+  [333, 500, 332.2325755150823, 500.0, 2.0]
+sqrt err 
+  [480, 640, 479.8204958165457, 640.0, 73.0]
+sqrt err 
+  [7.902828948316716, 480, 0, 480.0, 0.0]
+sqrt err 
+  [7.902828948316716, 480, 0, 480.0, 0.0]
+sqrt err 
+  [640, 480, 639.3859059726421, 480.0, 44.0]
+sqrt err 
+  [261.9290242877942, 0.0, 256.7240997053533, 0, 32.0]
+sqrt err 
+  [86.06400342269252, 427, 75.81456301508096, 427.0, 8.0]
+sqrt err 
+  [427, 640, 426.79822038975954, 640.0, 0.0]
+sqrt err 
+  [427, 640, 426.79822038975954, 640.0, 0.0]
+sqrt err 
+  [585.1586232216672, 0.0, 566.2367312009702, 0, 0.0]
+sqrt err 
+  [638.9612487578156, 0.0, 627.7500256435872, 0, 0.0]
+sqrt err 
+  [500, 402, 499.332901294769, 402.0, 0.0]
+sqrt err 
+  [500, 402, 499.332901294769, 402.0, 0.0]
+sqrt err 
+  [500, 402, 499.332901294769, 402.0, 2.0]
+sqrt err 
+  [622.5657618619182, 0.0, 582.9918709661912, 0, 0.0]
+sqrt err 
+  [628.4872020583879, 0.0, 582.9918709661912, 0, 0.0]
+sqrt err 
+  [613.4868303705764, 0.0, 582.9918709661912, 0, 0.0]
+sqrt err 
+  [633.3286887105247, 0.0, 582.9918709661912, 0, 0.0]
+sqrt err 
+  [608.2518013251658, 0.0, 582.9918709661912, 0, 0.0]
+sqrt err 
+  [597.3127970922737, 0.0, 586.2664004392401, 0, 73.0]
+sqrt err 
+  [553.5855411054803, 0.0, 509.94693272112454, 0, 39.0]
+sqrt err 
+  [9.839888175593876, 517, 0, 517.0, 47.0]
+sqrt err 
+  [640, 480, 639.6233935342873, 480.0, 2.0]
+sqrt err 
+  [640, 480, 639.6233935342873, 480.0, 2.0]
+sqrt err 
+  [640, 480, 639.6233935342873, 480.0, 2.0]
+sqrt err 
+  [640, 480, 639.6233935342873, 480.0, 9.0]
+sqrt err 
+  [640, 480, 639.6233935342873, 480.0, 9.0]
+sqrt err 
+  [73.19972206038726, 426, 53.35545594572372, 426.0, 2.0]
+sqrt err 
+  [640, 377, 639.6314856595295, 377.0, 11.0]
+sqrt err 
+  [640, 0.0, 599.6332962837064, 0, 73.0]
+sqrt err 
+  [627.1431185128978, 0.0, 599.6332962837064, 0, 73.0]
+sqrt err 
+  [640, 0.0, 601.5130244852227, 0, 73.0]
+sqrt err 
+  [640, 0.0, 599.6332962837064, 0, 73.0]
+sqrt err 
+  [640, 0.0, 599.6332962837064, 0, 73.0]
+sqrt err 
+  [640, 0.0, 600.5731603844646, 0, 73.0]
+sqrt err 
+  [640, 0.0, 600.5731603844646, 0, 73.0]
+sqrt err 
+  [633.2334378858106, 0.0, 600.5731603844646, 0, 73.0]
+sqrt err 
+  [640, 0.0, 600.5731603844646, 0, 73.0]
+sqrt err 
+  [629.3142045856491, 0.0, 600.5731603844646, 0, 73.0]
+sqrt err 
+  [640, 428, 639.1505805979409, 428.0, 26.0]
+sqrt err 
+  [640, 428, 639.1505805979409, 428.0, 26.0]
+sqrt err 
+  [427, 0.0, 375.9642116228068, 0, 9.0]
+sqrt err 
+  [427, 0.0, 376.8488332972134, 0, 9.0]
+sqrt err 
+  [427, 640, 426.59503192133934, 640.0, 2.0]
+sqrt err 
+  [0.9983369536585975, 428, 0, 428.0, 0.0]
+sqrt err 
+  [640, 400, 639.8825784086392, 400.0, 2.0]
+sqrt err 
+  [564.3395805688608, 0.0, 552.9833607626623, 0, 51.0]
+sqrt err 
+  [640, 0.0, 630.5769754549956, 0, 32.0]
+sqrt err 
+  [48.15053124740532, 427, 22.102945786068563, 427.0, 2.0]
+sqrt err 
+  [49.076503002163115, 427, 39.36305929475384, 427.0, 2.0]
+slurmstepd: error: *** JOB 81420 ON comp003 CANCELLED AT 2020-08-05T21:39:00 ***

@@ -1,16 +1,194 @@
-2020-08-05 18:38:21.700799: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
-2020-08-05 18:38:26.580532: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+2020-08-05 18:54:46.356267: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-08-05 18:54:51.239574: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
 name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
 pciBusID: 0000:06:00.0
 totalMemory: 11.17GiB freeMemory: 11.11GiB
-2020-08-05 18:38:26.580647: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
-2020-08-05 18:38:26.910425: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
-2020-08-05 18:38:26.910564: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
-2020-08-05 18:38:26.910589: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
-2020-08-05 18:38:26.910709: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
-  0%|          | 0/233 [00:00<?, ?it/s]2020-08-05 18:38:43.545232: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:38:43.646059: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:38:43.846736: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.92GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:38:43.940495: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.84GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:38:44.017259: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
-2020-08-05 18:38:44.088351: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.28GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:54:51.239687: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2020-08-05 18:54:51.571962: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-08-05 18:54:51.572097: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2020-08-05 18:54:51.572121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2020-08-05 18:54:51.572240: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
+  0%|          | 0/233 [00:00<?, ?it/s]2020-08-05 18:55:08.153674: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.95GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:55:08.258215: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:55:08.461417: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.92GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:55:08.555764: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.84GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:55:08.636174: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.36GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+2020-08-05 18:55:08.710452: W tensorflow/core/common_runtime/bfc_allocator.cc:211] Allocator (GPU_0_bfc) ran out of memory trying to allocate 2.28GiB. The caller indicates that this is not a failure, but may mean that there could be performance gains if more memory were available.
+
+epoch: 0 lr:  1e-05 loss: 82.95418
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0000
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0000
+
+
+highest training accuacy: 0.0 at epoch: 0 
+
+=================================================================================================================================================================================
+  0%|          | 1/233 [18:03<69:49:07, 1083.40s/it]sqrt err 
+  [500, 375, 499.6368278628712, 375.0, 6.0]
+
+epoch: 1 lr:  1e-04 loss: 29.046701
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0000
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0000
+
+
+highest training accuacy: 0.0 at epoch: 0 
+
+=================================================================================================================================================================================
+  1%|          | 2/233 [35:52<69:14:04, 1078.98s/it]
+epoch: 2 lr:  0.001 loss: 7.6698303
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0182 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0009
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0101 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0005
+
+
+highest training accuacy: 0.0005 at epoch: 2 
+
+=================================================================================================================================================================================
+  1%|▏         | 3/233 [53:46<68:50:34, 1077.54s/it]
+epoch: 3 lr:  0.001 loss: 7.433977
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0639 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0032
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0227 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0011
+
+
+highest training accuacy: 0.0011 at epoch: 3 
+
+=================================================================================================================================================================================
+  2%|▏         | 4/233 [1:11:41<68:29:58, 1076.85s/it]
+epoch: 4 lr:  0.001 loss: 7.2867174
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1097 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0055
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1212 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0061
+
+
+highest training accuacy: 0.0061 at epoch: 4 
+
+=================================================================================================================================================================================
+  2%|▏         | 5/233 [1:29:34<68:07:11, 1075.58s/it]
+epoch: 5 lr:  0.001 loss: 7.1997213
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0114 | 0.0000 | 0.0000 | 0.0242 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0018
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0909 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0045
+
+
+highest training accuacy: 0.0061 at epoch: 4 
+
+=================================================================================================================================================================================
+  3%|▎         | 6/233 [1:47:26<67:45:16, 1074.52s/it]sqrt err 
+  [79.40676689091944, 338, 69.26973281973824, 338.0, 6.0]
+
+epoch: 6 lr:  0.001 loss: 7.1041217
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1202 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0060
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0909 | 0.0000 | 0.0000 | 0.0000 | 0.1818 | 0.0000 |
+Mean = 0.0136
+
+
+highest training accuacy: 0.0136 at epoch: 6 
+
+=================================================================================================================================================================================
+  3%|▎         | 7/233 [2:05:18<67:24:38, 1073.80s/it]sqrt err 
+  [272.64694728684793, 0.0, 259.15660354088413, 0, 2.0]
+
+epoch: 7 lr:  0.001 loss: 7.043541
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0909 | 0.0000 | 0.0000 | 0.1283 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0110
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1281 | 0.0000 | 0.0000 | 0.0000 | 0.1818 | 0.0000 |
+Mean = 0.0155
+
+
+highest training accuacy: 0.0155 at epoch: 7 
+
+=================================================================================================================================================================================
+  3%|▎         | 8/233 [2:23:10<67:04:55, 1073.31s/it]
+epoch: 8 lr:  0.001 loss: 7.009256
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1212 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1818 | 0.1364 | 0.1224 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0281
+
+
+| aeropl | bicycl |   bird |   boat | bottle |    bus |    car |    cat |  chair |    cow | dining |    dog |  horse | motorb | person | potted |  sheep |   sofa |  train | tvmoni |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1818 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.1122 | 0.0000 | 0.0000 | 0.0000 | 0.1818 | 0.0000 |
+Mean = 0.0238
+
+
+highest training accuacy: 0.0238 at epoch: 8 
+
+=================================================================================================================================================================================
+  4%|▍         | 9/233 [2:41:00<66:42:56, 1072.22s/it]slurmstepd: error: *** JOB 81419 ON comp001 CANCELLED AT 2020-08-05T21:39:00 ***

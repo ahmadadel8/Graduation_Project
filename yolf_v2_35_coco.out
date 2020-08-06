@@ -1,22 +1,116 @@
-2020-08-05 18:38:39.518088: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
-2020-08-05 18:38:44.399135: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
+2020-08-05 18:54:24.463473: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2 AVX AVX2 FMA
+2020-08-05 18:54:29.343954: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1432] Found device 0 with properties: 
 name: Tesla K80 major: 3 minor: 7 memoryClockRate(GHz): 0.8235
 pciBusID: 0000:06:00.0
 totalMemory: 11.17GiB freeMemory: 11.11GiB
-2020-08-05 18:38:44.399246: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
-2020-08-05 18:38:44.727044: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
-2020-08-05 18:38:44.727175: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
-2020-08-05 18:38:44.727199: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
-2020-08-05 18:38:44.727318: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
+2020-08-05 18:54:29.344060: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1511] Adding visible gpu devices: 0
+2020-08-05 18:54:29.675211: I tensorflow/core/common_runtime/gpu/gpu_device.cc:982] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-08-05 18:54:29.675340: I tensorflow/core/common_runtime/gpu/gpu_device.cc:988]      0 
+2020-08-05 18:54:29.675363: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1001] 0:   N 
+2020-08-05 18:54:29.675480: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1115] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 10761 MB memory) -> physical GPU (device: 0, name: Tesla K80, pci bus id: 0000:06:00.0, compute capability: 3.7)
   0%|          | 0/233 [00:00<?, ?it/s]loading annotations into memory...
-Done (t=16.96s)
+Done (t=16.60s)
 creating index...
 index created!
+sqrt err 
+  [640, 448, 639.6167044900051, 448.0, 2.0]
 /lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:83: RuntimeWarning: invalid value encountered in true_divide
   delta_area = ((ar_ - bbox_area(bbox))/ar_)
 /lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:85: RuntimeWarning: invalid value encountered in less
   mask = (delta_area < (1 - alpha)).astype(int)
 sqrt err 
-  [6.897130119758444, 640, 0, 640.0, 73.0]
+  [476, 0.0, 471.19764914549125, 0, 32.0]
 sqrt err 
-  [640, 480, 639.1893477749966, 480.0, 0.0]
+  [500, 333, 499.73757559646947, 333.0, 26.0]
+sqrt err 
+  [14.578315658586748, 333, 0, 333.0, 0.0]
+sqrt err 
+  [14.578315658586748, 333, 0, 333.0, 0.0]
+sqrt err 
+  [14.578315658586748, 333, 0, 333.0, 0.0]
+sqrt err 
+  [14.578315658586748, 333, 0, 333.0, 0.0]
+sqrt err 
+  [640, 0.0, 627.4042016459127, 0, 73.0]
+sqrt err 
+  [639.4024478808315, 0.0, 628.3860548566262, 0, 73.0]
+sqrt err 
+  [640, 0.0, 627.4042016459127, 0, 73.0]
+sqrt err 
+  [640, 480, 639.633103723942, 480.0, 39.0]
+sqrt err 
+  [480, 0.0, 475.9110844166361, 0, 0.0]
+sqrt err 
+  [640, 480, 639.8225462114063, 480.0, 30.0]
+sqrt err 
+  [634.7670255087036, 0.0, 630.0514839336377, 0, 0.0]
+sqrt err 
+  [120.56953904434086, 425, 115.81193020637495, 425.0, 10.0]
+sqrt err 
+  [119.75487999674397, 425, 88.243868035696, 425.0, 10.0]
+sqrt err 
+  [16.55810586605426, 480, 0, 480.0, 0.0]
+sqrt err 
+  [627.7733903021157, 0.0, 614.7390023920224, 0, 67.0]
+sqrt err 
+  [640, 632, 639.2744994024341, 632.0, 42.0]
+sqrt err 
+  [640, 632, 639.2744994024341, 632.0, 42.0]
+sqrt err 
+  [21.128674256261846, 317, 8.297806617004639, 317.0, 25.0]
+sqrt err 
+  [266, 190, 265.1720412468222, 190.0, 0.0]
+sqrt err 
+  [266, 190, 265.1720412468222, 190.0, 0.0]
+sqrt err 
+  [640, 480, 639.6056661388693, 480.0, 2.0]
+sqrt err 
+  [482.7112949573758, 0.0, 459.85695818034077, 0, 0.0]
+sqrt err 
+  [600, 0.0, 595.5181128805658, 0, 0.0]
+sqrt err 
+  [381.1378742535189, 0.0, 357.6234896701924, 0, 0.0]
+/lfs01/workdirs/alex054u3/nutshell/data_aug/bbox_util.py:83: RuntimeWarning: divide by zero encountered in true_divide
+  delta_area = ((ar_ - bbox_area(bbox))/ar_)
+sqrt err 
+  [28.728448576606198, 480, 19.535345032092213, 480.0, 43.0]
+sqrt err 
+  [640, 480, 639.3910450831241, 480.0, 0.0]
+sqrt err 
+  [640, 0.0, 631.9815212894746, 0, 0.0]
+sqrt err 
+  [58.370320193413754, 480, 48.49296757318448, 480.0, 75.0]
+sqrt err 
+  [427, 0.0, 358.19550220365375, 0, 9.0]
+sqrt err 
+  [22.572878590216042, 500, 20.832885865553553, 500.0, 27.0]
+sqrt err 
+  [640, 407, 639.7903670256015, 407.0, 1.0]
+sqrt err 
+  [640, 407, 639.7903670256015, 407.0, 3.0]
+sqrt err 
+  [112.37397751752069, 640, 100.47465085710375, 640.0, 0.0]
+sqrt err 
+  [45.5940909681984, 427, 27.60768732707034, 427.0, 0.0]
+
+epoch: 0 lr:  0.001 loss: 32.589405
+
+
+| person | bicycl |    car | motorb | aeropl |    bus |  train |  truck |   boat | traffi | fire h | stop s | parkin |  bench |   bird |    cat |    dog |  horse |  sheep |    cow | elepha |   bear |  zebra | giraff | backpa | umbrel | handba |    tie | suitca | frisbe |   skis | snowbo | sports |   kite | baseba | baseba | skateb | surfbo | tennis | bottle | wine g |    cup |   fork |  knife |  spoon |   bowl | banana |  apple | sandwi | orange | brocco | carrot | hot do |  pizza |  donut |   cake |  chair |   sofa | potted |    bed | dining | toilet | tvmoni | laptop |  mouse | remote | keyboa | cell p | microw |   oven | toaste |   sink | refrig |   book |  clock |   vase | scisso | teddy  | hair d | toothb |
+|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|--------|
+| 0.0909 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 |
+Mean = 0.0011
+loading annotations into memory...
+Traceback (most recent call last):
+  File "nutshell/yolf_mobilenetv2_35_coco.py", line 138, in <module>
+    ts_ac=evaluate_accuracy('te', edition=edition)
+  File "nutshell/yolf_mobilenetv2_35_coco.py", line 91, in evaluate_accuracy
+    for i,(img,_) in enumerate(acc_data):
+  File "/lfs01/workdirs/alex054u3/nutshell/coco.py", line 213, in load
+    _, files = get_files(data_dir, data_name, total_num)
+  File "/lfs01/workdirs/alex054u3/nutshell/coco.py", line 61, in get_files
+    (data_dir, data_name))
+  File "/home/alex054u3/.local/lib/python3.6/site-packages/pycocotools/coco.py", line 84, in __init__
+    dataset = json.load(open(annotation_file, 'r'))
+FileNotFoundError: [Errno 2] No such file or directory: '/lfs02/datasets/coco//annotations/instances_val2017.json'
+  0%|          | 0/233 [1:58:37<?, ?it/s]
