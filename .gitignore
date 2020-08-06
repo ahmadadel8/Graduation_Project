@@ -1,3 +1,4 @@
+training_trial_step_mobilenetv1_50_voc
 coco_ann
 bin
 nutshell/__pycache
@@ -8,4 +9,5 @@ training_trial_step_mobilenetv1_voc
 training_trial_step_mobilenetv2_35_coco
 training_trial_step_mobilenetv2_35_voc
 training_trial_step_mobilenetv2_coco
+training_trial_step_mobilenetv2_voc
 training_trial_step_mobilenetv2_voc
