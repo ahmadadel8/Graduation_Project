@@ -22,6 +22,7 @@ import voc
 from utils import *
 
 
+
 C1=[238, 72, 58, 24, 203, 230, 54, 167, 246, 136, 106, 95, 226, 171, 43, 159, 231, 101, 65, 157]
 C2=[122, 71, 173, 32, 147, 241, 53, 197, 228, 164, 4, 209, 175, 223, 176, 182, 48, 3, 70, 13]
 C3=[148, 69, 133, 41, 157, 137, 125, 245, 89, 85, 162, 43, 16, 178, 197, 150, 13, 140, 177, 224]
@@ -59,19 +60,20 @@ voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x,nets.MobileNet100v2, 'voc')
+yolo=model(x,nets.MobileNet50, 'voc')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
-lr = tf.train.piecewise_constant(
-    gstep, [100, 180, 320, 570, 1000, 12000 ,15000, 25000],
-    [1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 1e-4, 1e-5, 1e-6])
+
+lr     = tf.Variable(1e-3,trainable=False,dtype=tf.float64)
+lr_sch = tf.math.multiply(lr,tf.math.pow(tf.cast(0.5,tf.float64),tf.math.divide(step,10)))
+
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_voc"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_50_voc-LRShoot"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
@@ -125,7 +127,7 @@ with tf.Session() as sess:
     
     for btch, (imgs, metas) in enumerate(trains):
       # `trains` returns None when it covers the full batch once
-      if imgs is None: break      
+      if imgs is None: break         
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
       outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
@@ -139,6 +141,13 @@ with tf.Session() as sess:
 
     acc =float(ts_ac.split(' = ')[-1])
 
+    if(i%10 == 0):
+      if (acc > acc_best):
+        acc_best= acc
+        sess.run(step.assign(i))
+        sess.run(lr.assign(lr_sch))
+      else:
+        sess.run(lr.assign(1e-4))
 
     if (acc > acc_best):
       acc_best= acc

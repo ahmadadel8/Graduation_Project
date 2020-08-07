@@ -146,5 +146,5 @@ with tf.Session() as sess:
       best_epoch=i
 
 
-    print ('highest training accuacy:', acc_best, 'at epoch:', best_epoch, '\n')
+    print ('highest val accuacy:', acc_best, 'at epoch:', best_epoch, '\n')
     print ('=================================================================================================================================================================================')
