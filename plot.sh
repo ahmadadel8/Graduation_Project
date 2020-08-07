@@ -18,6 +18,6 @@ python -u nutshell/plotter.py yolf_v1_50_voc.out fig_yolf_v1_50_voc.png
 python -u nutshell/plotter.py yolf_v2_voc.out fig_yolf_v2_voc.png
 python -u nutshell/plotter.py yolf_v2_35_voc.out fig_yolf_v2_35_voc.png
 python -u nutshell/plotter.py yolf_v1_50_lrshoot_voc.out fig_yolf_v1_50_lrshoot_voc.png
-
-
-
+python -u nutshell/plotter.py yolf_v1_100_dark_lrshoot_voc.out fig_yolf_v1_100_dark_lrshoot_voc.png
+python -u nutshell/plotter.py yolf_v1_100_lrshoot_voc.out fig_yolf_v1_100_lrshoot_voc.png
+python -u nutshell/plotter.py yolf_v1_50_lrshoot_voc.out fig_yolf_v1_50_dark_lrshoot_voc.png

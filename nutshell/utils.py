@@ -9,6 +9,7 @@ import tensornets as nets
 from tensorflow.keras.utils import plot_model
 from tensornets.references.yolo_utils import get_v2_boxes, v2_loss, v2_inputs
 from tensornets.preprocess import darknet_preprocess as preprocess
+from tensornets.layers import darkconv
 import os
 
 def darkdepthsepconv(inputs, filters, kernel, name, lmbda=5e-4, dropout_rate=0):
@@ -51,22 +52,29 @@ def meta(dataset_name='voc'):
   return opt
   
 
-def model(inputs, stem_fn,dataset_name, scope='stem' ,is_training=True): 
+def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_training=True): 
   metas=meta(dataset_name)
   N_classes=metas['classes']
 
   with tf.name_scope('stem'):
     x = stem =  stem_fn(inputs, is_training=True, stem=True,  scope=scope) #bulding the model
 
+
+
   p = x.p
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv7')
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv8')
-  p = darkdepthsepconv(p, 64, 1, name='genYOLOv1/conv5a')
+  if (yolo_head=='sep'): 
+  	conv=darkdepthsepconv
+  elif (yolo_head=='dark'):
+  	conv=darkconv
+
+  x = conv(x, 1024, 3, 'genYOLOv1/conv7')
+  x = conv(x, 1024, 3, 'genYOLOv1/conv8')
+  p = conv(p, 64, 1, 'genYOLOv1/conv5a')
   p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
   x = tf.concat([p, x], axis=3, name='concat')
 
-  x = darkdepthsepconv(x, 1024, 3, name='genYOLOv1/conv9')
+  x = conv(x, 1024, 3, 'genYOLOv1/conv9')
   x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
