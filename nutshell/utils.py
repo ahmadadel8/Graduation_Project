@@ -12,15 +12,15 @@ from tensornets.preprocess import darknet_preprocess as preprocess
 from tensornets.layers import darkconv
 import os
 
-def darkdepthsepconv(inputs, filters, kernel, name, lmbda=5e-4, dropout_rate=0):
-  with tf.name_scope(name):
-    x = tf.keras.layers.DepthwiseConv2D(kernel, depth_multiplier=1, padding='same', use_bias=False, name=name+'/sconv', kernel_regularizer=tf.keras.regularizers.l2(lmbda),kernel_initializer=tf.keras.initializers.VarianceScaling(scale=1.53846))(inputs)
-    x = tf.keras.layers.BatchNormalization(momentum=0.99, epsilon=1e-5, center=False, scale=True, name=name+'/bnd')(x)
+def darkdepthsepconv(inputs, filters, kernel, scope, lmbda=5e-4, dropout_rate=0):
+  with tf.name_scope(scope):
+    x = tf.keras.layers.DepthwiseConv2D(kernel, depth_multiplier=1, padding='same', use_bias=False, name=scope+'/sconv', kernel_regularizer=tf.keras.regularizers.l2(lmbda),kernel_initializer=tf.keras.initializers.VarianceScaling(scale=1.53846))(inputs)
+    x = tf.keras.layers.BatchNormalization(momentum=0.99, epsilon=1e-5, center=False, scale=True, name=scope+'/bnd')(x)
     x = tf.keras.layers.LeakyReLU(alpha=0.1)(x)
 
-    x = tf.keras.layers.Conv2D(filters, 1, padding='same', use_bias=False, name=name+'/conv', kernel_regularizer=tf.keras.regularizers.l2(lmbda),kernel_initializer=tf.keras.initializers.VarianceScaling(scale=1.53846))(x)
-    x = tf.keras.layers.BatchNormalization(momentum=0.99, epsilon=1e-5, center=False, scale=True, name=name+'/bns')(x)
-    x = tf.nn.bias_add(x, tf.Variable(tf.random_normal([filters])), name= name+'bias_add')
+    x = tf.keras.layers.Conv2D(filters, 1, padding='same', use_bias=False, name=scope+'/conv', kernel_regularizer=tf.keras.regularizers.l2(lmbda),kernel_initializer=tf.keras.initializers.VarianceScaling(scale=1.53846))(x)
+    x = tf.keras.layers.BatchNormalization(momentum=0.99, epsilon=1e-5, center=False, scale=True, name=scope+'/bns')(x)
+    x = tf.nn.bias_add(x, tf.Variable(tf.random_normal([filters])), name= scope+'bias_add')
     x = tf.keras.layers.LeakyReLU(alpha=0.1)(x)
     x = tf.keras.layers.Dropout(rate=dropout_rate)(x, training=True)
     return x
@@ -68,13 +68,13 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
   elif (yolo_head=='dark'):
   	conv=darkconv
 
-  x = conv(x, 1024, 3, 'genYOLOv1/conv7')
-  x = conv(x, 1024, 3, 'genYOLOv1/conv8')
-  p = conv(p, 64, 1, 'genYOLOv1/conv5a')
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv7')
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv8')
+  p = conv(p, 64, 1, scope='genYOLOv1/conv5a')
   p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
   x = tf.concat([p, x], axis=3, name='concat')
 
-  x = conv(x, 1024, 3, 'genYOLOv1/conv9')
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv9')
   x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
