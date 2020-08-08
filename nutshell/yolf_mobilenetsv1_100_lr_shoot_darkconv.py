@@ -130,9 +130,11 @@ with tf.Session() as sess:
       if imgs is None: break         
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
-      outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
+      outs= sess.run([train,yolo, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
-    
+      if np.isnan(outs[-1]):
+        print("NaN loss detected. Output of the last layer is \n:", outs[1])
+        
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
     tr_ac=evaluate_accuracy('tr')
