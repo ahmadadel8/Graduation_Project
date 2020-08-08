@@ -6,7 +6,7 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --time=34:15:00
-#SBATCH --output=yolf_v1_50_lrshoot_voc.out
+#SBATCH --output=yolf_v1_50_dark_lrshoot_voc.out
 #SBATCH --mail-user=graduationprojectplease@gmail.com
 #SBATCH --mail-type=ALL,TIME_LIMIT_10
 
