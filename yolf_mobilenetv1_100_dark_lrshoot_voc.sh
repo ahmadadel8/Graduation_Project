@@ -1,6 +1,6 @@
 #!/bin/sh
 #SBATCH --account=g.alex054
-#SBATCH --job-name=voc_v1_dark_shoot_100_yolf
+#SBATCH --job-name=voc_100_dark_shoot_yolf
 #SBATCH --partition=gpu
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
