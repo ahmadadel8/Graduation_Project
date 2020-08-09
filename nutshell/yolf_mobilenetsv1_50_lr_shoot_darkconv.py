@@ -31,11 +31,6 @@ def visualize_img(img,bboxes,thickness,name):
   img=img.reshape(img.shape[1],img.shape[1],3)
   for c, boxes_c in enumerate(bboxes):
     for b in boxes_c:
-      #ul_x, ul_y=b[0]-b[2]/2.0, b[1]-b[3]/2.0
-      #br_x, br_y=b[0]+b[2]/2.0, b[1]+b[3]/2.0
-
-      #ul_x, ul_y=(min(max(int(ul_x),0),415),min(max(int(ul_y),0),415))
-      #br_x, br_y=(min(max(int(br_x),0),415),min(max(int(br_y),0),415))
 
       ul_x, ul_y=int(b[0]), int(b[1])
       br_x, br_y=int(b[2]), int(b[3])
@@ -65,7 +60,7 @@ yolo=model(x,nets.MobileNet50, 'voc', yolo_head='dark')
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 
-lr     = tf.Variable(1e-3,trainable=False,dtype=tf.float64)
+lr     = tf.Variable(1e-8,trainable=False,dtype=tf.float64)
 lr_sch = tf.math.multiply(lr,tf.math.pow(tf.cast(0.5,tf.float64),tf.math.divide(step,10)))
 
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
@@ -108,6 +103,10 @@ def evaluate_accuracy(data_type='tr'):
   
 acc_best, best_epoch=0.0, 0
 
+sched={100: 1e-7, 180: 1e-6, 320: 1e-5, 570: 1e-4}
+def lr_sched(gstep):
+	if gstep.eval() in sched.keys():
+		lr.assign(sched[gstep.eval()])
 
 with tf.Session() as sess:
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
@@ -120,19 +119,18 @@ with tf.Session() as sess:
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
     losses = []
-
     trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
-
     sess.run(step.assign(i))
     
     for btch, (imgs, metas) in enumerate(trains):
+
       # `trains` returns None when it covers the full batch once
       if imgs is None: break         
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
       outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
-    
+      lr_sched(gstep)
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
     tr_ac=evaluate_accuracy('tr')

@@ -65,7 +65,7 @@ yolo=model(x,nets.MobileNet100, 'voc', yolo_head='dark')
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 
-lr     = tf.Variable(1e-4,trainable=False,dtype=tf.float64)
+lr     = tf.Variable(1e-8,trainable=False,dtype=tf.float64)
 lr_sch = tf.math.multiply(lr,tf.math.pow(tf.cast(0.5,tf.float64),tf.math.divide(step,10)))
 
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
@@ -108,6 +108,10 @@ def evaluate_accuracy(data_type='tr'):
   
 acc_best, best_epoch=0.0, 0
 
+sched={100: 1e-7, 180: 1e-6, 320: 1e-5, 570: 1e-4}
+def lr_sched(gstep):
+  if gstep.eval() in sched.keys():
+    lr.assign(sched[gstep.eval()])
 
 with tf.Session() as sess:
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
@@ -132,8 +136,7 @@ with tf.Session() as sess:
       metas.append(True)                      # for `is_training`
       outs= sess.run([train,yolo, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
-      if np.isnan(outs[-1]):
-        print("NaN loss detected. Output of the last layer is \n:", outs[1])
+      lr_sched(gstep)
 
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
