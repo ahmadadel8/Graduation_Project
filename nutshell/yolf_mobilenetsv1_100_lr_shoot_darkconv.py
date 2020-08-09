@@ -65,7 +65,7 @@ yolo=model(x,nets.MobileNet100, 'voc', yolo_head='dark')
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
 
-lr     = tf.Variable(1e-3,trainable=False,dtype=tf.float64)
+lr     = tf.Variable(1e-4,trainable=False,dtype=tf.float64)
 lr_sch = tf.math.multiply(lr,tf.math.pow(tf.cast(0.5,tf.float64),tf.math.divide(step,10)))
 
 train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
@@ -134,7 +134,7 @@ with tf.Session() as sess:
       losses.append(outs[-1])
       if np.isnan(outs[-1]):
         print("NaN loss detected. Output of the last layer is \n:", outs[1])
-        
+
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
     tr_ac=evaluate_accuracy('tr')
