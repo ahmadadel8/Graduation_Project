@@ -18,6 +18,7 @@ import tarfile
 import shutil
 import wget
 import sys
+sys.path.append('~/data/nutshell')
 import voc
 from utils import *
 
@@ -68,7 +69,7 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_50_voc-LRShoot_darkconv"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_50_voc-LRShoot_darkconv_update_step"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
@@ -139,7 +140,7 @@ with tf.Session() as sess:
 
     acc =float(ts_ac.split(' = ')[-1])
 
-    if(i%10 == 0):
+    if(i>=6):
       if (acc > acc_best):
         acc_best= acc
         sess.run(step.assign(i))

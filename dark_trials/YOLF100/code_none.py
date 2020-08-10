@@ -18,6 +18,7 @@ import tarfile
 import shutil
 import wget
 import sys
+sys.path.append('~/data/nutshell')
 import voc
 from utils import *
 
@@ -31,6 +32,11 @@ def visualize_img(img,bboxes,thickness,name):
   img=img.reshape(img.shape[1],img.shape[1],3)
   for c, boxes_c in enumerate(bboxes):
     for b in boxes_c:
+      #ul_x, ul_y=b[0]-b[2]/2.0, b[1]-b[3]/2.0
+      #br_x, br_y=b[0]+b[2]/2.0, b[1]+b[3]/2.0
+
+      #ul_x, ul_y=(min(max(int(ul_x),0),415),min(max(int(ul_y),0),415))
+      #br_x, br_y=(min(max(int(br_x),0),415),min(max(int(br_y),0),415))
 
       ul_x, ul_y=int(b[0]), int(b[1])
       br_x, br_y=int(b[2]), int(b[3])
@@ -55,7 +61,7 @@ voc_dir = '/home/alex054u4/data/nutshell/newdata/VOCdevkit/VOC%d'
 is_training = tf.placeholder(tf.bool)
 N_classes=20
 x = tf.placeholder(tf.float32, shape=(None, 416, 416, 3), name='input_x')
-yolo=model(x,nets.MobileNet50, 'voc', yolo_head='dark')
+yolo=model(x,nets.MobileNet100, 'voc', yolo_head='dark')
 # Define an optimizer
 step = tf.Variable(0, trainable=False)
 gstep = tf.Variable(0, trainable=False)
@@ -68,7 +74,7 @@ train = tf.train.AdamOptimizer(lr, 0.9).minimize(yolo.loss,global_step=gstep)
 current_epo= tf.Variable(0, name = 'current_epo',trainable=False,dtype=tf.int32)
 
 #Check points for step training_trial_step
-checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_50_voc-LRShoot_darkconv"
+checkpoint_path   = "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv1_100_voc-LRShoot_darkconv_none"
 checkpoint_prefix = os.path.join(checkpoint_path,"ckpt")
 if not os.path.exists(checkpoint_path):
   os.mkdir(checkpoint_path)
@@ -103,10 +109,10 @@ def evaluate_accuracy(data_type='tr'):
   
 acc_best, best_epoch=0.0, 0
 
-sched={100: 1e-7, 180: 1e-6, 320: 1e-5}
+sched={100: 1e-7, 180: 1e-6, 320: 1e-5, 570: 1e-4}
 def lr_sched(gstep):
-	if gstep.eval() in sched.keys():
-		sess.run(lr.assign(sched[gstep.eval()]))	
+  if gstep.eval() in sched.keys():
+    lr.assign(sched[gstep.eval()])
 
 with tf.Session() as sess:
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
@@ -119,18 +125,20 @@ with tf.Session() as sess:
   for i in tqdm(range(step.eval(),233)):
     # Iterate on VOC07+12 trainval once
     losses = []
+
     trains = voc.load_train([voc_dir % 2007, voc_dir % 2012],'trainval', batch_size=48)
+
     sess.run(step.assign(i))
     
     for btch, (imgs, metas) in enumerate(trains):
-
       # `trains` returns None when it covers the full batch once
       if imgs is None: break         
       metas.insert(0, yolo.preprocess(imgs))  # for `inputs`
       metas.append(True)                      # for `is_training`
-      outs= sess.run([train, yolo.loss],dict(zip(yolo.inputs, metas)))
+      outs= sess.run([train,yolo, yolo.loss],dict(zip(yolo.inputs, metas)))
       losses.append(outs[-1])
       lr_sched(gstep)
+
     
     print('\nepoch:',step.eval(),'lr: ',lr.eval(),'loss:',np.mean(losses))
     tr_ac=evaluate_accuracy('tr')
@@ -139,13 +147,13 @@ with tf.Session() as sess:
 
     acc =float(ts_ac.split(' = ')[-1])
 
-    if(i%10 == 0):
+    if(i%5 == 0):
       if (acc > acc_best):
         acc_best= acc
         sess.run(step.assign(i))
         sess.run(lr.assign(lr_sch))
       else:
-        sess.run(lr.assign(1e-5))
+        sess.run(lr.assign(1e-4))
 
     if (acc > acc_best):
       acc_best= acc
