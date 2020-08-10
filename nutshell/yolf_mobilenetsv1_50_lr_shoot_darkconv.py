@@ -106,7 +106,7 @@ acc_best, best_epoch=0.0, 0
 sched={100: 1e-7, 180: 1e-6, 320: 1e-5, 570: 1e-4}
 def lr_sched(gstep):
 	if gstep.eval() in sched.keys():
-		lr.assign(sched[gstep.eval()])
+		sess.run(lr.assign(sched[gstep.eval()]))
 
 with tf.Session() as sess:
   ckpt_files = [f for f in os.listdir(checkpoint_path) if os.path.isfile(os.path.join(checkpoint_path, f)) and 'ckpt' in f]
