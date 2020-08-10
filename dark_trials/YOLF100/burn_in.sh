@@ -9,6 +9,6 @@
 #SBATCH --output=log_burn_in.out
 #SBATCH --mail-user=graduationprojectplease@gmail.com
 #SBATCH --mail-type=ALL,TIME_LIMIT_10
-
+#SBATCH --priority=TOP
 
 python -u nutshell/code_burn_in.py

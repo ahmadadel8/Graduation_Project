@@ -9,7 +9,7 @@
 #SBATCH --output=log_update_step.out
 #SBATCH --mail-user=graduationprojectplease@gmail.com
 #SBATCH --mail-type=ALL,TIME_LIMIT_10
-
+#SBATCH --priority=TOP
 
 python -u code_update_step.py
 

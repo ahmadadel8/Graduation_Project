@@ -9,7 +9,7 @@
 #SBATCH --output=log_burn_in_period.out
 #SBATCH --mail-user=graduationprojectplease@gmail.com
 #SBATCH --mail-type=ALL,TIME_LIMIT_10
-
+#SBATCH --priority=TOP
 
 python -u code_burn_in_period.py
 
