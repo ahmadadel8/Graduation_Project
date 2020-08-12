@@ -12,8 +12,9 @@ from tensornets.preprocess import darknet_preprocess as preprocess
 from tensornets.layers import darkconv
 import os
 
-def darkdepthsepconv(inputs, filters, kernel, scope, lmbda=5e-4, dropout_rate=0):
+def darkdepthsepconv(inputs, filters, kernel, scope, lmbda=5e-4, dropout_rate=0, double_filters=True):
   with tf.name_scope(scope):
+    if (double_filters==True): filters=filters*2
     x = tf.keras.layers.DepthwiseConv2D(kernel, depth_multiplier=1, padding='same', use_bias=False, name=scope+'/sconv', kernel_regularizer=tf.keras.regularizers.l2(lmbda),kernel_initializer=tf.keras.initializers.VarianceScaling(scale=1.53846))(inputs)
     x = tf.keras.layers.BatchNormalization(momentum=0.99, epsilon=1e-5, center=False, scale=True, name=scope+'/bnd')(x)
     x = tf.keras.layers.LeakyReLU(alpha=0.1)(x)
@@ -52,7 +53,7 @@ def meta(dataset_name='voc'):
   return opt
   
 
-def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_training=True): 
+def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_training=True, double_filters=True): 
   metas=meta(dataset_name)
   N_classes=metas['classes']
 
@@ -64,22 +65,25 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
   p = x.p
 
   if (yolo_head=='sep'): 
-  	conv=darkdepthsepconv
+    conv=darkdepthsepconv
   elif (yolo_head=='dark'):
-  	conv=darkconv
+    conv=darkconv
 
-  x = conv(x, 1024, 3, scope='genYOLOv1/conv7')
-  x = conv(x, 1024, 3, scope='genYOLOv1/conv8')
-  p = conv(p, 64, 1, scope='genYOLOv1/conv5a')
-  p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv7',double_filters=double_filters)
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv8',double_filters=double_filters)
+  p = conv(p, 64, 1, scope='genYOLOv1/conv5a', double_filters=double_filters)
+  if (yolo_head=='dark'):
+    p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
+  elif (yolo_head=='sep' and double_filters==True):
+    p = tf.reshape(p,[-1, 13,13,512], name='flat5a')  
+
   x = tf.concat([p, x], axis=3, name='concat')
-
-  x = conv(x, 1024, 3, scope='genYOLOv1/conv9')
+  x = conv(x, 1024, 3, scope='genYOLOv1/conv9', double_filters=double_filters)
   x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
   def get_boxes(*args, **kwargs):
-  	return get_v2_boxes(metas, *args, **kwargs)
+    return get_v2_boxes(metas, *args, **kwargs)
   x.get_boxes = get_boxes
   x.stem = stem
   x.inputs = [inputs]
@@ -88,7 +92,7 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
       x.inputs.append(is_training)
   x.loss = v2_loss(x, metas['anchors'], N_classes)
   def preprocess_(*args, **kwargs):
-  	return preprocess(target_size=(416,416), *args, **kwargs)
+    return preprocess(target_size=(416,416), *args, **kwargs)
   x.preprocess=preprocess_
   return x
 
