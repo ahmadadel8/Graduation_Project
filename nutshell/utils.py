@@ -74,11 +74,13 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
   p = conv(p, 64, 1, scope='genYOLOv1/conv5a', double_filters=double_filters)
   if (yolo_head=='dark'):
     p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
+    x = tf.concat([p, x], axis=3, name='concat')
+    x = conv(x, 1024, 3, scope='genYOLOv1/conv9')
   elif (yolo_head=='sep' and double_filters==True):
-    p = tf.reshape(p,[-1, 13,13,512], name='flat5a')  
-
-  x = tf.concat([p, x], axis=3, name='concat')
-  x = conv(x, 1024, 3, scope='genYOLOv1/conv9', double_filters=double_filters)
+    p = tf.reshape(p,[-1, 13,13,512], name='flat5a') 
+    x = tf.concat([p, x], axis=3, name='concat')
+    x = conv(x, 2048, 3, scope='genYOLOv1/conv9')
+ 
   x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
   x.aliases = []
 
