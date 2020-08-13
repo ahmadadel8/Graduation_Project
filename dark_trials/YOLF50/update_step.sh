@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --time=34:15:00
+#SBATCH --time=60:15:00
 #SBATCH --output=log_update_step.out
 #SBATCH --mail-user=graduationprojectplease@gmail.com
 #SBATCH --mail-type=ALL,TIME_LIMIT_10
