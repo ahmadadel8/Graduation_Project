@@ -1,2 +1,0 @@
-model_checkpoint_path: "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_voc/ckpt"
-all_model_checkpoint_paths: "/home/alex054u3/data/nutshell/training_trial_step_mobilenetv2_voc/ckpt"
