@@ -79,10 +79,8 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
     p = tf.reshape(p,[-1, 13,13,256], name='flat5a')
     x = tf.concat([p, x], axis=3, name='concat')
     x = darkconv(x, 1024, 3, scope='genYOLOv1/conv9')
-
-   
-  x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
-  x.aliases = []
+    x = tf.keras.layers.Conv2D((N_classes+ 5) * 5, 1, kernel_regularizer=tf.keras.regularizers.l2(), padding='same', name='genYOLOv2/linear/conv')(x)
+    x.aliases = []
 
   def get_boxes(*args, **kwargs):
     return get_v2_boxes(metas, *args, **kwargs)
@@ -91,7 +89,7 @@ def model(inputs, stem_fn, dataset_name, yolo_head='sep', scope='stem' ,is_train
   x.inputs = [inputs]
   x.inputs += v2_inputs(x.shape[1:3], metas['num'], N_classes, x.dtype)
   if isinstance(is_training, tf.Tensor):
-      x.inputs.append(is_training)
+    x.inputs.append(is_training)
   x.loss = v2_loss(x, metas['anchors'], N_classes)
   def preprocess_(*args, **kwargs):
     return preprocess(target_size=(416,416), *args, **kwargs)
